@@ -1,0 +1,44 @@
+.LoginForm{
+    width: 30vw; 
+    display: flex;
+    flex-direction: column;
+    border: 1px solid;
+    border-color: rgb(50, 222, 138); 
+    margin: 3rem 0; 
+    border-radius: 10px;
+    padding: 0rem 2rem 3rem 2rem; 
+
+  
+    .login-confirm{
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 0;
+
+
+      .instructions{
+        font-weight:600;
+        font-size:1.1rem;
+    }
+    
+    
+  }
+
+  .login-form{
+      width: 100%;
+      padding: 1rem 2rem; 
+
+      button{
+        margin-top: 2.5rem;
+      }
+    }
+
+      .ant-form-item-required{
+        color: rgb(50, 222, 138) !important;
+      }
+
+      .ant-form-item-explain-error{
+        text-align: end;
+        padding: 0 .8rem; 
+      }
+
+  }
