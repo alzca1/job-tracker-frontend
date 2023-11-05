@@ -1,48 +1,51 @@
-import React from "react";
 import { Button, Form, Input } from "antd";
 import { AnimatePresence, motion } from "framer-motion";
+import React from "react";
 
-export const Login = () => {
+export default function SignUp({ handleView }) {
   return (
     <AnimatePresence>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
-        <div className="LoginForm">
-          <div className="login-confirm">
-            <h2>Welcome back!</h2>
+        <div className="SignForm">
+          <div className="sign-confirm">
+            <h2>Hello stranger!</h2>
             <div>
-              <span>Log in to start tracking jobs</span>
+              <span>Sign up to start tracking jobs</span>
             </div>
           </div>
-          <Form name="login" className="login-form" layout="vertical" size="large">
+          <Form name="signup" className="sign-form" layout="vertical" size="large">
+            <Form.Item
+              label="Name"
+              name="Name"
+              rules={[{ required: true, message: "Please input your name!" }]}
+            >
+              <Input placeholder="Enter your name" />
+            </Form.Item>
             <Form.Item
               label="Email"
               name="Email"
               rules={[{ required: true, message: "Please input your email!" }]}
-              className="label"
             >
-              <Input placeholder="Your email..." />
+              <Input placeholder="Enter your email" />
             </Form.Item>
-
             <Form.Item
               label="Password"
               name="Password"
               rules={[{ required: true, message: "Please input your password!" }]}
               className="label"
-              labelAlign="left"
             >
               <Input type="password" placeholder="Your password..." />
             </Form.Item>
-
             <Button block="true" size="large" type="primary" htmlType="submit">
-              Log in
+              Sign up!
             </Button>
           </Form>
-
           <small>
-            Not registered yet? Click <a>here</a> to create an account
+            Already registered? Click <button onClick={() => handleView("LOGIN")}>here</button>
+            to log into your account
           </small>
         </div>
       </motion.div>
     </AnimatePresence>
   );
-};
+}
