@@ -2,9 +2,23 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./main.scss";
+import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ErrorPage from "./Pages/ErrorPage/ErrorPage.jsx";
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <ErrorPage />,
+  },
+]);
+
+const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </React.StrictMode>
 );
