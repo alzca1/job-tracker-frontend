@@ -1,8 +1,33 @@
 import { Button, Form, Input } from "antd";
+import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
-import React from "react";
+import React, { useState } from "react";
+import { useMutation } from "react-query";
 
 export default function SignUp({ handleView }) {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const mutation = useMutation({
+    mutationFn: (userCreation) => {
+      return axios.post(`${import.meta.env.VITE_BACKEND_URL}/register`, userCreation);
+    },
+    onSuccess: (data, variables, context) => {
+      debugger;
+      sessionStorage.setItem(
+        "user",
+        JSON.stringify({ token: data.data.token, user: variables.email, name: variables.name })
+      );
+      handleView("HOME");
+      console.log(data, variables);
+    },
+  });
+
+  const handleSubmit = (data) => {
+    debugger;
+    const { email, name, password } = data;
+    mutation.mutate({ name, email, password });
+  };
+
   return (
     <AnimatePresence>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
@@ -13,28 +38,34 @@ export default function SignUp({ handleView }) {
               <span>Sign up to start tracking jobs</span>
             </div>
           </div>
-          <Form name="signup" className="sign-form" layout="vertical" size="large">
+          <Form
+            name="signup"
+            className="sign-form"
+            layout="vertical"
+            size="large"
+            onFinish={handleSubmit}
+          >
             <Form.Item
               label="Name"
-              name="Name"
+              name="name"
               rules={[{ required: true, message: "Please input your name!" }]}
             >
               <Input placeholder="Enter your name" />
             </Form.Item>
             <Form.Item
               label="Email"
-              name="Email"
+              name="email"
               rules={[{ required: true, message: "Please input your email!" }]}
             >
               <Input placeholder="Enter your email" />
             </Form.Item>
             <Form.Item
               label="Password"
-              name="Password"
+              name="password"
               rules={[{ required: true, message: "Please input your password!" }]}
               className="label"
             >
-              <Input type="password" placeholder="Your password..." />
+              <Input.Password type="password" placeholder="Your password..." />
             </Form.Item>
             <Button block="true" size="large" type="primary" htmlType="submit">
               Sign up!
