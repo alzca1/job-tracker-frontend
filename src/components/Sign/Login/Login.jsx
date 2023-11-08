@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Form, Input } from "antd";
 import { AnimatePresence, motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function Login({ handleView }) {
   return (
@@ -39,8 +40,7 @@ export default function Login({ handleView }) {
           </Form>
 
           <small>
-            Not registered yet? Click <button onClick={() => handleView("SIGNUP")}>here</button> to
-            create an account
+            Not registered yet? Click <Link to="/signup"> here </Link> to create an account
           </small>
         </div>
       </motion.div>

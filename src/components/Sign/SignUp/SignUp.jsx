@@ -3,10 +3,9 @@ import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
 import { useMutation } from "react-query";
+import { Link } from "react-router-dom";
 
 export default function SignUp({ handleView }) {
-  const [passwordVisible, setPasswordVisible] = useState(false);
-
   const mutation = useMutation({
     mutationFn: (userCreation) => {
       return axios.post(`${import.meta.env.VITE_BACKEND_URL}/register`, userCreation);
@@ -72,7 +71,7 @@ export default function SignUp({ handleView }) {
             </Button>
           </Form>
           <small>
-            Already registered? Click <button onClick={() => handleView("LOGIN")}>here</button>
+            Already registered? Click <Link to="/login"> here </Link>
             to log into your account
           </small>
         </div>

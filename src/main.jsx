@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./main.scss";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./Pages/ErrorPage/ErrorPage.jsx";
-import SignView from "./components/Sign/SignView.jsx";
 import SignUp from "./components/Sign/SignUp/SignUp.jsx";
+import Login from "./components/Sign/Login/Login.jsx";
 
 const router = createBrowserRouter([
   {
@@ -15,8 +15,12 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/login",
+        path: "/signup",
         element: <SignUp />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
       },
     ],
   },
