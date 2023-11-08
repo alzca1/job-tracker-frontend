@@ -1,7 +1,8 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Home from "./Pages/Home/Home";
+import AuthProvider from "./context/AuthContext";
 
 function App() {
   let location = useLocation();
@@ -11,12 +12,14 @@ function App() {
   }, [location]);
 
   return (
-    <div className="App">
-      <Home />
-      <div className="content">
-        <Outlet />
+    <AuthProvider>
+      <div className="App">
+        <Home />
+        <div className="content">
+          <Outlet />
+        </div>
       </div>
-    </div>
+    </AuthProvider>
   );
 }
 
