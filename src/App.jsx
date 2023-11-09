@@ -1,26 +1,29 @@
 import "./App.css";
 import { useEffect } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, RouterProvider, createBrowserRouter, useLocation } from "react-router-dom";
 import Home from "./Pages/Home/Home";
-import AuthProvider from "./context/AuthContext";
+import Navbar from "./components/Navbar/Navbar";
+import Root from "./components/Root/Root";
+import ErrorPage from "./Pages/ErrorPage/ErrorPage";
+import Auth from "./components/Auth/Auth";
 
 function App() {
-  let location = useLocation();
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Root />,
+      errorElement: <ErrorPage />,
+      children: [
+        { index: true, element: <Home /> },
+        {
+          path: "/auth",
+          element: <Auth />,
+        },
+      ],
+    },
+  ]);
 
-  useEffect(() => {
-    console.log(location);
-  }, [location]);
-
-  return (
-    <AuthProvider>
-      <div className="App">
-        <Home />
-        <div className="content">
-          <Outlet />
-        </div>
-      </div>
-    </AuthProvider>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

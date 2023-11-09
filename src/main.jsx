@@ -10,32 +10,13 @@ import Login from "./components/Auth/Login/Login.jsx";
 import UserHome from "./Pages/UserHome/UserHome.jsx";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
 import { AuthProvider } from "./hooks/useAuth.jsx";
-import Auth from "./components/Auth/Auth.jsx";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: "/auth",
-        element: <Auth />,
-      },
-      {
-        path: "/home",
-        element: <ProtectedRoute component={UserHome} />,
-      },
-    ],
-  },
-]);
 
 const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
+        <App />
       </QueryClientProvider>
     </AuthProvider>
   </React.StrictMode>
