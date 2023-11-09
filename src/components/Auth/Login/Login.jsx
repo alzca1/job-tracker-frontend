@@ -2,9 +2,34 @@ import React, { useContext, useEffect } from "react";
 import { Button, Form, Input } from "antd";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
+import { useMutation } from "react-query";
+import axios from "axios";
 
 export default function Login({ handleView }) {
   const navigate = useNavigate();
+
+  const mutation = useMutation({
+    mutationFn: (userLogin) => {
+      debugger;
+      return axios.post(`${import.meta.env.VITE_BACKEND_URL}/login`, userLogin);
+    },
+    onSuccess: (data, variables, context) => {
+      debugger;
+      sessionStorage.setItem(
+        "user",
+        JSON.stringify({ token: data.data.token, user: variables.email, name: variables.name })
+      );
+      navigate("/home");
+    },
+    onError: (error) => {
+      console.log("error", error);
+    },
+  });
+
+  const handleSubmit = (data) => {
+    console.log("data", data);
+    mutation.mutate(data);
+  };
 
   return (
     <AnimatePresence>
@@ -16,10 +41,16 @@ export default function Login({ handleView }) {
               <span>Log in to start tracking jobs</span>
             </div>
           </div>
-          <Form name="login" className="sign-form" layout="vertical" size="large">
+          <Form
+            name="login"
+            className="sign-form"
+            layout="vertical"
+            size="large"
+            onFinish={handleSubmit}
+          >
             <Form.Item
               label="Email"
-              name="Email"
+              name="email"
               rules={[{ required: true, message: "Please input your email!" }]}
               className="label"
             >
@@ -28,7 +59,7 @@ export default function Login({ handleView }) {
 
             <Form.Item
               label="Password"
-              name="Password"
+              name="password"
               rules={[{ required: true, message: "Please input your password!" }]}
               className="label"
               labelAlign="left"

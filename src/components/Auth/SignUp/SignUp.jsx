@@ -25,8 +25,10 @@ export default function SignUp({ handleView }) {
         "user",
         JSON.stringify({ token: data.data.token, user: variables.email, name: variables.name })
       );
-      authenticateUser();
       navigate("/home");
+    },
+    onError: (error) => {
+      console.log("error", error);
     },
   });
 
