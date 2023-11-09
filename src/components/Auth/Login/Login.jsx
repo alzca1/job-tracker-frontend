@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Button, Form, Input } from "antd";
 import { AnimatePresence, motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login({ handleView }) {
+  const navigate = useNavigate();
+
   return (
     <AnimatePresence>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
@@ -40,7 +42,7 @@ export default function Login({ handleView }) {
           </Form>
 
           <small>
-            Not registered yet? Click <Link to="/signup"> here </Link> to create an account
+            Not registered yet? Click <Link to="?mode=signup"> here </Link> to create an account
           </small>
         </div>
       </motion.div>

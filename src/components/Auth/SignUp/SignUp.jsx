@@ -1,28 +1,36 @@
 import { Button, Form, Input } from "antd";
 import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useMutation } from "react-query";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../../hooks/useAuth";
 
 export default function SignUp({ handleView }) {
+  const navigate = useNavigate();
+  const { authenticateUser, userAuthenticated } = useAuth();
+
+  useEffect(() => {
+    if (userAuthenticated) {
+      navigate("/home");
+    }
+  }, []);
+
   const mutation = useMutation({
     mutationFn: (userCreation) => {
       return axios.post(`${import.meta.env.VITE_BACKEND_URL}/register`, userCreation);
     },
     onSuccess: (data, variables, context) => {
-      debugger;
       sessionStorage.setItem(
         "user",
         JSON.stringify({ token: data.data.token, user: variables.email, name: variables.name })
       );
-      handleView("HOME");
-      console.log(data, variables);
+      authenticateUser();
+      navigate("/home");
     },
   });
 
   const handleSubmit = (data) => {
-    debugger;
     const { email, name, password } = data;
     mutation.mutate({ name, email, password });
   };
@@ -64,14 +72,19 @@ export default function SignUp({ handleView }) {
               rules={[{ required: true, message: "Please input your password!" }]}
               className="label"
             >
-              <Input.Password type="password" placeholder="Your password..." />
+              <Input.Password
+                type="password"
+                placeholder="Your password..."
+                autoComplete="false"
+                autoSave="false"
+              />
             </Form.Item>
             <Button block="true" size="large" type="primary" htmlType="submit">
               Sign up!
             </Button>
           </Form>
           <small>
-            Already registered? Click <Link to="/login"> here </Link>
+            Already registered? Click <Link to="?mode=login"> here </Link>
             to log into your account
           </small>
         </div>
