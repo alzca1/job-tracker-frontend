@@ -7,7 +7,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Root from "./components/Root/Root";
 import ErrorPage from "./Pages/ErrorPage/ErrorPage";
 import Auth from "./components/Auth/Auth";
-import { checkAuthToken } from "./helpers/auth";
+import { checkAlreadyLogged, checkAuthToken } from "./helpers/auth";
 
 function App() {
   const router = createBrowserRouter([
@@ -20,6 +20,7 @@ function App() {
         {
           path: "/auth",
           element: <Auth />,
+          loader: checkAlreadyLogged,
         },
         {
           path: "/home",

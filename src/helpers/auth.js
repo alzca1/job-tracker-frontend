@@ -14,3 +14,12 @@ export const checkAuthToken = () => {
 
   return null;
 };
+
+export const checkAlreadyLogged = () => {
+  const token = getToken();
+
+  if (token) {
+    return redirect("/home");
+  }
+  return null;
+};

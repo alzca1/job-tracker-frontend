@@ -10,11 +10,9 @@ export default function Login({ handleView }) {
 
   const mutation = useMutation({
     mutationFn: (userLogin) => {
-      debugger;
       return axios.post(`${import.meta.env.VITE_BACKEND_URL}/login`, userLogin);
     },
     onSuccess: (data, variables, context) => {
-      debugger;
       sessionStorage.setItem(
         "user",
         JSON.stringify({ token: data.data.token, user: variables.email, name: variables.name })
