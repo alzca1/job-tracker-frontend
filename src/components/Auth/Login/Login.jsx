@@ -13,10 +13,8 @@ export default function Login({ handleView }) {
       return axios.post(`${import.meta.env.VITE_BACKEND_URL}/login`, userLogin);
     },
     onSuccess: (data, variables, context) => {
-      sessionStorage.setItem(
-        "user",
-        JSON.stringify({ token: data.data.token, user: variables.email, name: variables.name })
-      );
+      const { token, name, email } = data.data;
+      sessionStorage.setItem("user", JSON.stringify({ token: token, user: email, name: name }));
       navigate("/home");
     },
     onError: (error) => {

@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import React, { useContext, useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../../hooks/useAuth";
 
 export default function SignUp({ handleView }) {
   const navigate = useNavigate();
@@ -21,10 +20,8 @@ export default function SignUp({ handleView }) {
       return axios.post(`${import.meta.env.VITE_BACKEND_URL}/register`, userCreation);
     },
     onSuccess: (data, variables, context) => {
-      sessionStorage.setItem(
-        "user",
-        JSON.stringify({ token: data.data.token, user: variables.email, name: variables.name })
-      );
+      const { token, name, email } = data.data;
+      sessionStorage.setItem("user", JSON.stringify({ token: token, user: email, name: name }));
       navigate("/home");
     },
     onError: (error) => {
