@@ -1,0 +1,42 @@
+.SignForm {
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid;
+    border-color: rgb(50, 222, 138);
+    margin: 3rem 0;
+    border-radius: 10px;
+    padding: 0rem 2rem 3rem 2rem;
+
+
+    .sign-confirm {
+        display: flex;
+        flex-direction: column;
+        padding: 2rem 0;
+        align-items: center;
+
+        h2{
+            margin: 0;
+        }
+    }
+
+    .sign-form {
+        width: 100%;
+        padding: 1rem 2rem;
+
+        button {
+            margin-top: 2.5rem;
+        }
+    }
+
+    .ant-form-item-required {
+        color: rgb(50, 222, 138) !important;
+    }
+
+    .ant-form-item-explain-error {
+        text-align: end;
+        padding: 0 .8rem;
+    }
+
+}

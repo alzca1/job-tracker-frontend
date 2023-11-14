@@ -2,5 +2,10 @@
 
 
 //Components
-@import '../components/Login/Login.scss';
-@import '../components/Welcome/Welcome.scss';
+@import '/src/components/Root/Root.scss';
+@import '../components/Auth/Sign.scss';
+@import '/src/Pages/ErrorPage/ErrorPage.scss';
+@import '/src/Pages/Home/Home.scss';
+@import '/src/components/Navbar/Navbar.scss';
+@import '/src/Pages/UserHome/UserHome.scss';
+@import '/src/components/JobForm/JobForm.scss'
