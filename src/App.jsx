@@ -8,8 +8,10 @@ import Root from "./components/Root/Root";
 import ErrorPage from "./Pages/ErrorPage/ErrorPage";
 import Auth from "./components/Auth/Auth";
 import { checkAlreadyLogged, checkAuthToken } from "./helpers/auth";
+import { ConfigProvider, theme } from "antd";
 
 function App() {
+  const { defaultAlgorithm, darkAlgorithm } = theme;
   const router = createBrowserRouter([
     {
       path: "/",
@@ -31,7 +33,11 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <ConfigProvider theme={{ algorithm: darkAlgorithm }}>
+      <RouterProvider router={router} />
+    </ConfigProvider>
+  );
 }
 
 export default App;
