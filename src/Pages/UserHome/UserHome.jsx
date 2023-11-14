@@ -4,6 +4,7 @@ import { Button, Modal } from "antd";
 import { getToken } from "../../helpers/auth";
 import JobForm from "../../components/JobForm/JobForm";
 import { useMutation } from "react-query";
+import JobPanel from "../../components/JobPanel/JobPanel";
 
 export default function UserHome() {
   const navigate = useNavigate();
@@ -20,6 +21,8 @@ export default function UserHome() {
       <Button type="primary" onClick={handleShowModal}>
         Add Job
       </Button>
+      <JobPanel />
+
       <Modal
         className="addJobModal"
         title="Add job"
