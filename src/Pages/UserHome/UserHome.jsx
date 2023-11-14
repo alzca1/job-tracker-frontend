@@ -27,6 +27,7 @@ export default function UserHome() {
         maskClosable={true}
         footer={null}
         onCancel={handleShowModal}
+        destroyOnClose={true}
       >
         <JobForm handleShowModal={handleShowModal} />
       </Modal>
