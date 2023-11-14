@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button, Modal } from "antd";
 import { getToken } from "../../helpers/auth";
 import JobForm from "../../components/JobForm/JobForm";
+import { useMutation } from "react-query";
 
 export default function UserHome() {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ export default function UserHome() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleShowModal = () => {
-    setIsModalOpen(true);
+    setIsModalOpen(!isModalOpen);
   };
 
   return (
@@ -23,11 +24,12 @@ export default function UserHome() {
         className="addJobModal"
         title="Add job"
         open={isModalOpen}
-        onCancel={() => setIsModalOpen(false)}
         maskClosable={true}
-        okText="Save job"
+        footer={null}
+        onCancel={handleShowModal}
+        destroyOnClose={true}
       >
-        <JobForm />
+        <JobForm handleShowModal={handleShowModal} />
       </Modal>
     </div>
   );
