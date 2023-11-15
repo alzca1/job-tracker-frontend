@@ -2,17 +2,25 @@ import { Button, DatePicker, Form, Input, Select } from "antd";
 import axios from "axios";
 import React from "react";
 import { useMutation } from "react-query";
-import axiosInstance from "../../helpers/instance";
+import { getToken } from "../../helpers/auth";
 
 const dateFormat = "DD/MM/YYYY";
 
-export default function JobForm({ handleShowModal }) {
+export default function JobForm({ handleShowModal, setJobs }) {
+  const headers = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()?.token}`,
+    },
+  };
   const mutation = useMutation({
     mutationFn: (job) => {
-      return axiosInstance.post(`${import.meta.env.VITE_BACKEND_URL}/application/create`, job);
+      return axios.post(`${import.meta.env.VITE_BACKEND_URL}/application/create`, job, headers);
     },
     onSuccess: (data, variables, context) => {
-      console.log("data", data);
+      const job = data.data.newApplication;
+      job._id = Date.now();
+      setJobs((prevState) => [...prevState, job]);
       handleShowModal();
     },
   });
@@ -71,7 +79,7 @@ export default function JobForm({ handleShowModal }) {
         <Form.Item label="Job URL" name="jobURL">
           <Input placeholder="Enter job URL..." />
         </Form.Item>
-        <Button>Cancel</Button>
+        <Button onClick={handleShowModal}>Cancel</Button>
         <Button htmlType="submit">Save job</Button>
       </Form>
     </div>

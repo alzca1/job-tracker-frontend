@@ -6,9 +6,7 @@ import Job from "../Job/Job";
 import axios from "axios";
 import { getToken } from "../../helpers/auth";
 
-export default function JobPanel() {
-  const [jobs, setJobs] = useState([]);
-
+export default function JobPanel({ handleShowModal, jobs, setJobs }) {
   const headers = {
     headers: {
       "Content-Type": "application/json",
@@ -34,7 +32,9 @@ export default function JobPanel() {
     <div className="JobPanel">
       <Button onClick={handleGetJobs}>Get jobs</Button>
       <div className="job-list">
-        <div className="empty-job">Add Job</div>
+        <button className="add-job" onClick={handleShowModal}>
+          Add Job
+        </button>
         {jobs.map((job) => {
           return <Job key={job._id} jobData={job} />;
         })}
