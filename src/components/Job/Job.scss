@@ -1,3 +1,54 @@
 .Job{
+    background-color: #208E58;
+    min-width: 250px; 
+    padding: 1rem; 
+    border-radius: 8px; 
+
+    .job-info{
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+    }
+
+    .job-info span:nth-child(1n){
+        font-size: 1.1rem;
+        font-weight: 800;
+        margin: 0; 
+        padding: 0; 
+        line-height: 1.2;
+    }
+    .job-info span:nth-child(2n){
+        font-size: .8rem;
+        font-weight: 600;
+        color: black; 
+        margin: 0; 
+        padding: 0; 
+    }
+
+    .job-status-date{
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+    }
+
+    .job-status-date span:nth-child(1){
+        font-size: 1.5rem;
+        align-self: center; 
+        padding: .8rem; 
+        font-weight: 200;
+    }
+
+    .job-status-date span:nth-child(2){
+        font-size: .8rem; 
+        align-self: end;
+        font-weight: 600; 
+    }
+    span{
+        display: block; 
+    }
+
+
     
 }
