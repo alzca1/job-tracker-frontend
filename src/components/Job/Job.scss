@@ -1,7 +1,7 @@
 .Job{
     background-color: #208E58;
     min-width: 250px; 
-    padding: 1rem; 
+    padding: 1rem 1rem .2rem 1rem; 
     border-radius: 8px; 
 
     .job-info{
@@ -41,14 +41,15 @@
     }
 
     .job-status-date span:nth-child(2){
-        font-size: .8rem; 
+        font-size: .7rem; 
         align-self: end;
         font-weight: 600; 
+        margin-top: .3rem
     }
+
+
     span{
         display: block; 
     }
-
-
     
 }
