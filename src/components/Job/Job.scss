@@ -53,3 +53,83 @@
     }
     
 }
+
+
+
+.job-edit .ant-modal-content{
+    background-color: #208E58 !important;
+    min-height: 300px; 
+}
+
+.job-edit  .editable-job-info {
+    display: flex; 
+    flex-direction: column;
+
+    input{
+        border: none; 
+        outline: none; 
+        background-color: inherit;
+    }
+
+    input:nth-child(1){
+        font-size: 1.4rem;
+        font-weight: 800;
+        line-height: .5rem
+    }
+
+    input:nth-child(2){
+        font-size: .95rem; 
+        font-weight: 600;
+        padding: 0; 
+        margin: 0;
+        line-height: 0.5;
+        color: black; 
+    }
+    
+}
+
+
+
+.job-edit .editable-job-status-date{
+    display: flex; 
+    flex-direction: column;
+    min-height: 200px; 
+}
+
+
+
+.job-edit .editable-job-status-date .ant-select-selector{
+    background-color: inherit !important;
+    border: none !important; 
+    outline: none !important;
+    margin-top: 4rem;
+    line-height: 3rem;
+}
+
+.job-edit .ant-select-selector span{
+    font-size: 2.5rem;
+    text-align: center;
+    font-weight: 200;
+}
+.job-edit .ant-select-selection-item{
+    line-height: 3rem;
+    height: 3rem;
+}
+
+.job-edit .editable-job-status-date .date{
+    margin-top: auto; 
+    align-self: flex-end;
+}
+.ant-select-item-option-selected{
+    background-color: #3cc181 !important;
+}
+
+// .job-edit .editable-job-status-date .date{
+//     border: 1px solid red; 
+    
+// }
+
+
+
+
+
