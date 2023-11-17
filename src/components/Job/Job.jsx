@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { formatDate } from "../../helpers/date";
 import { Modal, Select } from "antd";
+import EditableJob from "../EditableJob/EditableJob";
 
 export default function Job({ jobData }) {
   console.log(jobData);
@@ -27,28 +28,7 @@ export default function Job({ jobData }) {
         closeIcon={false}
         className="job-edit"
       >
-        <div className="editable-job-card">
-          <div className="editable-job-info">
-            <input placeholder="Position"></input>
-            <input placeholder="Company Name"></input>
-          </div>
-          <div className="editable-job-status-date">
-            <Select
-              size="large"
-              dropdownStyle={{ backgroundColor: "#208E58", fontSize: "1.3rem" }}
-              style={{ backgroundColor: "#208E58" }}
-              bordered={false}
-              placeholder="Status"
-              suffixIcon={false}
-            >
-              <Select.Option key="1">pending</Select.Option>
-              <Select.Option key="2">interview</Select.Option>
-              <Select.Option key="3">accepted</Select.Option>
-              <Select.Option key="4">rejected</Select.Option>
-            </Select>
-            <span className="date">Date</span>
-          </div>
-        </div>
+        <EditableJob jobDetails={jobData} />
       </Modal>
     </div>
   );

@@ -2,7 +2,7 @@ import { Select } from "antd";
 import React from "react";
 
 export default function EditableJob({ jobDetails }) {
-  const { position, companyName, date, status } = jobDetails;
+  const { position, companyName, dateApplied, status } = jobDetails;
 
   const statusOptions = [
     { key: 1, value: "pending", name: "Pending" },
@@ -14,8 +14,8 @@ export default function EditableJob({ jobDetails }) {
   return (
     <div className="editable-job-card">
       <div className="editable-job-info">
-        <input placeholder="Position">{position}</input>
-        <input placeholder="Company Name">{companyName}</input>
+        <input placeholder="Position" defaultValue={position} name="position" />
+        <input placeholder="Company Name" defaultValue={companyName} name="companyName" />
       </div>
       <div className="editable-job-status-date">
         <Select
@@ -34,7 +34,7 @@ export default function EditableJob({ jobDetails }) {
             );
           })}
         </Select>
-        <span className="date">{date}</span>
+        <span className="date">{dateApplied}</span>
       </div>
     </div>
   );
