@@ -1,23 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { formatDate } from "../../helpers/date";
 import { Modal, Select } from "antd";
 import EditableJob from "../EditableJob/EditableJob";
 
-export default function Job({ jobData }) {
-  console.log(jobData);
-  const { companyName, position, dateApplied, status } = jobData;
+export default function Job({ jobData, setJobs }) {
+  const { companyName, position, dateApplied, status, jobUrl, _id, userId } = jobData;
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [job, setJob] = useState({
+    _id: _id,
+    companyName: companyName,
+    position: position,
+    dateApplied: dateApplied,
+    status: status,
+    jobUrl: jobUrl,
+    userId: userId,
+  });
 
-  const dropDownStyle = { backgroundColor: "#208E58 !important" };
+  useEffect(() => {
+    console.log("job updated", job);
+  }, [job]);
+
   return (
     <div className="Job" onDoubleClick={() => setIsModalOpen(true)}>
       <div className="job-info">
-        <span>{position || "N/A"}</span>
-        <span>{companyName || "N/A"}</span>
+        <span>{job?.position || "N/A"}</span>
+        <span>{job?.companyName || "N/A"}</span>
       </div>
       <div className="job-status-date">
-        <span>{status || "N/A"}</span>
-        <span>{formatDate(dateApplied) || "N/A"}</span>
+        <span>{job?.status || "N/A"}</span>
+        <span>{formatDate(job?.dateApplied) || "N/A"}</span>
       </div>
       <Modal
         open={isModalOpen}
@@ -28,7 +39,7 @@ export default function Job({ jobData }) {
         closeIcon={false}
         className="job-edit"
       >
-        <EditableJob jobDetails={jobData} />
+        <EditableJob jobDetails={jobData} setJob={setJob} />
       </Modal>
     </div>
   );

@@ -35,9 +35,10 @@ export default function JobPanel({ handleShowModal, jobs, setJobs }) {
         <button className="add-job" onClick={handleShowModal}>
           Add Job
         </button>
-        {jobs.map((job) => {
-          return <Job key={job._id} jobData={job} />;
-        })}
+        {jobs.length &&
+          jobs.map((job) => {
+            return <Job key={job._id} jobData={job} setJobs={setJobs} />;
+          })}
       </div>
     </div>
   );
