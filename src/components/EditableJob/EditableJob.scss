@@ -74,5 +74,8 @@
         align-self: flex-end;
         font-weight: 600;
     }
-  
+
+    .ant-select-item-option-selected {
+        background-color: #3cc181 !important;
+    }
 }
