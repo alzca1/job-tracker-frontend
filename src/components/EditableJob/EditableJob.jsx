@@ -3,13 +3,15 @@ import React, { useEffect } from "react";
 import { formatDate } from "../../helpers/date";
 import { getToken } from "../../helpers/auth";
 import { useMutation } from "react-query";
-import { SaveOutlined } from "@ant-design/icons";
+import { CloseOutlined, SaveOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { useForm } from "antd/es/form/Form";
 
-export default function EditableJob({ jobDetails, setJob }) {
+export default function EditableJob({ jobDetails, setJob, setIsModalOpen }) {
   console.log("jobDetails", jobDetails);
   const { position, companyName, dateApplied, status, _id } = jobDetails;
+
+  const [form] = useForm();
 
   const statusOptions = [
     { key: 1, value: "pending", name: "Pending" },
@@ -40,6 +42,7 @@ export default function EditableJob({ jobDetails, setJob }) {
         ...prevState,
         ...variables,
       }));
+      setIsModalOpen(false);
     },
   });
 
@@ -54,6 +57,11 @@ export default function EditableJob({ jobDetails, setJob }) {
       console.log(data);
       mutation.mutate(data);
     }
+  };
+
+  const handleCancel = () => {
+    form.resetFields();
+    setIsModalOpen(false);
   };
 
   return (
@@ -101,8 +109,11 @@ export default function EditableJob({ jobDetails, setJob }) {
             <span className="date">{formatDate(dateApplied)}</span>
           </div>
         </div>
-        <Button htmlType="submit">
-          <SaveOutlined />
+        <Button htmlType="submit" className="saveButton">
+          <SaveOutlined type="submit" className="saveIcon" />
+        </Button>
+        <Button className="cancelButton" onClick={handleCancel}>
+          <CloseOutlined className="cancelIcon" />
         </Button>
       </Form>
     </div>

@@ -16,10 +16,6 @@ export default function Job({ jobData, setJobs }) {
     userId: userId,
   });
 
-  useEffect(() => {
-    console.log("job updated", job);
-  }, [job]);
-
   return (
     <div className="Job" onDoubleClick={() => setIsModalOpen(true)}>
       <div className="job-info">
@@ -39,7 +35,7 @@ export default function Job({ jobData, setJobs }) {
         closeIcon={false}
         className="job-edit"
       >
-        <EditableJob jobDetails={jobData} setJob={setJob} />
+        <EditableJob jobDetails={jobData} setJob={setJob} setIsModalOpen={setIsModalOpen} />
       </Modal>
     </div>
   );

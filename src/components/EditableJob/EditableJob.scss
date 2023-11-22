@@ -78,4 +78,39 @@
     .ant-select-item-option-selected {
         background-color: #3cc181 !important;
     }
+
+    .saveButton {
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        background-color: inherit !important;
+        position: absolute;
+        top: 1rem;
+        right: 1.5rem;
+
+        .saveIcon {
+            transform: scale(1.5);
+            transition: 500ms all;
+        }
+        .saveIcon:hover {
+            color: black;
+        }
+    }
+    .cancelButton {
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        background-color: inherit !important;
+        position: absolute;
+        top: 1rem;
+        right: 3.5rem;
+
+        .cancelIcon {
+            transform: scale(1.5);
+            transition: 500ms all;
+        }
+        .cancelIcon:hover {
+            color: red;
+        }
+    }
 }
