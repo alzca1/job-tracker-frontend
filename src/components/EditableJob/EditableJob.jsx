@@ -57,42 +57,54 @@ export default function EditableJob({ jobDetails, setJob }) {
   };
 
   return (
-    <Form onFinish={handleSubmit} name="editable-job-form">
-      <div className="editable-job-card">
-        <div className="editable-job-info">
-          <Form.Item name="position">
-            <input placeholder="Position" defaultValue={position} name="position" />
-          </Form.Item>
-          <Form.Item name="companyName">
-            <input placeholder="Company Name" defaultValue={companyName} name="companyName" />
-          </Form.Item>
+    <div className="EditableJob">
+      <Form onFinish={handleSubmit} name="editable-job-form">
+        <div className="editable-job-card">
+          <div className="editable-job-info">
+            <Form.Item name="position">
+              <input
+                className="positionInput"
+                placeholder="Position"
+                defaultValue={position}
+                name="position"
+              />
+            </Form.Item>
+            <Form.Item name="companyName">
+              <input
+                className="companyNameInput"
+                placeholder="Company Name"
+                defaultValue={companyName}
+                name="companyName"
+              />
+            </Form.Item>
+          </div>
+          <div className="editable-job-status-date">
+            <Form.Item name="status">
+              <Select
+                size="large"
+                dropdownStyle={{ backgroundColor: "#208E58", fontSize: "1.3rem" }}
+                style={{ backgroundColor: "#208E58" }}
+                bordered={false}
+                placeholder="Status"
+                suffixIcon={false}
+                defaultValue={statusOptions.find((option) => option.value === status)?.value}
+              >
+                {statusOptions.map((option) => {
+                  return (
+                    <Select.Option key={option.key} value={option.value}>
+                      {option.name}
+                    </Select.Option>
+                  );
+                })}
+              </Select>
+            </Form.Item>
+            <span className="date">{formatDate(dateApplied)}</span>
+          </div>
         </div>
-        <div className="editable-job-status-date">
-          <Form.Item name="status">
-            <Select
-              size="large"
-              dropdownStyle={{ backgroundColor: "#208E58", fontSize: "1.3rem" }}
-              style={{ backgroundColor: "#208E58" }}
-              bordered={false}
-              placeholder="Status"
-              suffixIcon={false}
-              defaultValue={statusOptions.find((option) => option.value === status)?.value}
-            >
-              {statusOptions.map((option) => {
-                return (
-                  <Select.Option key={option.key} value={option.value}>
-                    {option.name}
-                  </Select.Option>
-                );
-              })}
-            </Select>
-          </Form.Item>
-          <span className="date">{formatDate(dateApplied)}</span>
-        </div>
-      </div>
-      <Button htmlType="submit">
-        <SaveOutlined />
-      </Button>
-    </Form>
+        <Button htmlType="submit">
+          <SaveOutlined />
+        </Button>
+      </Form>
+    </div>
   );
 }

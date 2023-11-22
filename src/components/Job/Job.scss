@@ -1,136 +1,125 @@
-.Job{
-    background-color: #208E58;
-    min-width: 250px; 
-    padding: 1rem 1rem .2rem 1rem; 
-    border-radius: 8px; 
+.Job {
+    background-color: #208e58;
+    min-width: 250px;
+    padding: 1rem 1rem 0.2rem 1rem;
+    border-radius: 8px;
 
-    .job-info{
+    .job-info {
         display: flex;
         flex-direction: column;
         justify-content: start;
         align-items: start;
     }
 
-    .job-info span:nth-child(1n){
+    .job-info span:nth-child(1n) {
         font-size: 1.1rem;
         font-weight: 800;
-        margin: 0; 
-        padding: 0; 
+        margin: 0;
+        padding: 0;
         line-height: 1.2;
     }
-    .job-info span:nth-child(2n){
-        font-size: .8rem;
+    .job-info span:nth-child(2n) {
+        font-size: 0.8rem;
         font-weight: 600;
-        color: black; 
-        margin: 0; 
-        padding: 0; 
+        color: black;
+        margin: 0;
+        padding: 0;
     }
 
-    .job-status-date{
+    .job-status-date {
         display: flex;
         flex-direction: column;
         justify-content: start;
         align-items: start;
     }
 
-    .job-status-date span:nth-child(1){
+    .job-status-date span:nth-child(1) {
         font-size: 1.5rem;
-        align-self: center; 
-        padding: .8rem; 
+        align-self: center;
+        padding: 0.8rem;
         font-weight: 200;
     }
 
-    .job-status-date span:nth-child(2){
-        font-size: .7rem; 
+    .job-status-date span:nth-child(2) {
+        font-size: 0.7rem;
         align-self: end;
-        font-weight: 600; 
-        margin-top: .3rem
-    }
-
-
-    span{
-        display: block; 
-    }
-    
-}
-
-
-
-.job-edit .ant-modal-content{
-    background-color: #208E58 !important;
-    min-height: 300px; 
-}
-
-.job-edit  .editable-job-info {
-    display: flex; 
-    flex-direction: column;
-
-    input{
-        border: none; 
-        outline: none; 
-        background-color: inherit;
-    }
-
-    input:nth-child(1){
-        font-size: 1.4rem;
-        font-weight: 800;
-        line-height: .5rem
-    }
-
-    input:nth-child(2){
-        font-size: .95rem; 
         font-weight: 600;
-        padding: 0; 
-        margin: 0;
-        line-height: 0.5;
-        color: black; 
+        margin-top: 0.3rem;
     }
-    
+
+    span {
+        display: block;
+    }
 }
 
-
-
-.job-edit .editable-job-status-date{
-    display: flex; 
-    flex-direction: column;
-    min-height: 200px; 
+.job-edit .ant-modal-content {
+    background-color: #208e58 !important;
+    min-height: 300px;
 }
 
-
-
-.job-edit .editable-job-status-date .ant-select-selector{
-    background-color: inherit !important;
-    border: none !important; 
-    outline: none !important;
-    margin-top: 4rem;
-    line-height: 3rem;
-}
-
-.job-edit .ant-select-selector span{
-    font-size: 2.5rem;
-    text-align: center;
-    font-weight: 200;
-}
-.job-edit .ant-select-selection-item{
-    line-height: 3rem;
-    height: 3rem;
-}
-
-.job-edit .editable-job-status-date .date{
-    margin-top: auto; 
-    align-self: flex-end;
-    font-weight: 600; 
-}
-.ant-select-item-option-selected{
+.ant-select-item-option-selected {
     background-color: #3cc181 !important;
 }
 
-// .job-edit .editable-job-status-date .date{
-//     border: 1px solid red; 
-    
+// .job-edit .editable-job-info {
+//     display: flex;
+//     flex-direction: column;
+
+//     input {
+//         border: none;
+//         outline: none;
+//         background-color: inherit;
+//     }
+
+//     input:nth-child(1) {
+//         font-size: 1.4rem;
+//         font-weight: 800;
+//         line-height: 0.5rem;
+//     }
+
+//     input:nth-child(2) {
+//         font-size: 0.95rem;
+//         font-weight: 600;
+//         padding: 0;
+//         margin: 0;
+//         line-height: 0.5;
+//         color: black;
+//     }
 // }
 
+// .job-edit .editable-job-status-date {
+//     display: flex;
+//     flex-direction: column;
+//     min-height: 200px;
+// }
 
+// .job-edit .editable-job-status-date .ant-select-selector {
+//     background-color: inherit !important;
+//     border: none !important;
+//     outline: none !important;
+//     margin-top: 4rem;
+//     line-height: 3rem;
+// }
 
+// .job-edit .ant-select-selector span {
+//     font-size: 2.5rem;
+//     text-align: center;
+//     font-weight: 200;
+// }
+// .job-edit .ant-select-selection-item {
+//     line-height: 3rem;
+//     height: 3rem;
+// }
 
+// .job-edit .editable-job-status-date .date {
+//     margin-top: auto;
+//     align-self: flex-end;
+//     font-weight: 600;
+// }
+// .ant-select-item-option-selected {
+//     background-color: #3cc181 !important;
+// }
 
+// .job-edit .editable-job-status-date .date {
+//     border: 1px solid red;
+// }
