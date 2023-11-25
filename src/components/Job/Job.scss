@@ -52,11 +52,9 @@
     }
 }
 
-.job-edit .ant-modal-content {
-    background-color: #208e58 !important;
-    min-height: 300px;
-}
 
- .ant-select-item-option-selected {
-    background-color: #3cc181 !important;
+
+.ant-select-item-option-selected {
+    background-color: inherit !important;
+    font-weight: 800;
 }

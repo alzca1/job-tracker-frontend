@@ -5,13 +5,12 @@ import { getToken } from "../../helpers/auth";
 import { useMutation } from "react-query";
 import { CloseOutlined, SaveOutlined } from "@ant-design/icons";
 import axios from "axios";
-import { useForm } from "antd/es/form/Form";
 
-export default function EditableJob({ jobDetails, setJob, setIsModalOpen }) {
+export default function EditableJob({ jobDetails, setJob, setIsModalOpen, setTemporaryStatus }) {
   console.log("jobDetails", jobDetails);
   const { position, companyName, dateApplied, status, _id } = jobDetails;
 
-  const [form] = useForm();
+  const [form] = Form.useForm();
 
   const statusOptions = [
     { key: 1, value: "pending", name: "Pending" },
@@ -64,6 +63,10 @@ export default function EditableJob({ jobDetails, setJob, setIsModalOpen }) {
     setIsModalOpen(false);
   };
 
+  const handleTemporaryChange = (status) => {
+    setTemporaryStatus(status);
+  };
+
   return (
     <div className="EditableJob">
       <Form onFinish={handleSubmit} name="editable-job-form">
@@ -90,12 +93,19 @@ export default function EditableJob({ jobDetails, setJob, setIsModalOpen }) {
             <Form.Item name="status">
               <Select
                 size="large"
-                dropdownStyle={{ backgroundColor: "#208E58", fontSize: "1.3rem" }}
-                style={{ backgroundColor: "#208E58" }}
+                dropdownStyle={{
+                  backgroundColor: "inherit",
+                  fontSize: "1.3rem",
+                  backdropFilter: "blur(7px)",
+                  fontWeight: "600 !important",
+                  font: "1rem",
+                }}
+                style={{ backgroundColor: "inherit" }}
                 bordered={false}
                 placeholder="Status"
                 suffixIcon={false}
                 defaultValue={statusOptions.find((option) => option.value === status)?.value}
+                onChange={handleTemporaryChange}
               >
                 {statusOptions.map((option) => {
                   return (
