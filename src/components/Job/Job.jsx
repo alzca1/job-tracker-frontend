@@ -47,7 +47,11 @@ export default function Job({ jobData, setJobs }) {
   };
 
   return (
-    <div className="Job" onDoubleClick={() => setIsModalOpen(true)}>
+    <div
+      className="Job"
+      onDoubleClick={() => setIsModalOpen(true)}
+      style={{ backgroundColor: stateColors[job.status] }}
+    >
       <div className="job-info">
         <span>{job?.position || "N/A"}</span>
         <span>{job?.companyName || "N/A"}</span>
@@ -56,7 +60,6 @@ export default function Job({ jobData, setJobs }) {
         <span>{job?.status || "N/A"}</span>
         <span>{formatDate(job?.dateApplied) || "N/A"}</span>
       </div>
-      {/* <ConfigProvider modal={{ styles: modalStyles }}> */}
       <Modal
         open={isModalOpen}
         maskClosable={true}
@@ -74,7 +77,6 @@ export default function Job({ jobData, setJobs }) {
           setTemporaryStatus={setTemporaryStatus}
         />
       </Modal>
-      {/* </ConfigProvider> */}
     </div>
   );
 }
