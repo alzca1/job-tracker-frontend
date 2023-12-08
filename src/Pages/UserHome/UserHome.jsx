@@ -4,6 +4,7 @@ import { Button, Modal } from "antd";
 import { getToken } from "../../helpers/auth";
 import JobForm from "../../components/JobForm/JobForm";
 import JobPanel from "../../components/JobPanel/JobPanel";
+import BlankJob from "../../components/Auth/BlankJob/BlankJob";
 
 export default function UserHome() {
   const userInfo = getToken();
@@ -28,7 +29,8 @@ export default function UserHome() {
         onCancel={handleShowModal}
         destroyOnClose={true}
       >
-        <JobForm handleShowModal={handleShowModal} setJobs={setJobs} />
+        {/* <JobForm handleShowModal={handleShowModal} setJobs={setJobs} /> */}
+        <BlankJob setJobs={setJobs} />
       </Modal>
     </div>
   );

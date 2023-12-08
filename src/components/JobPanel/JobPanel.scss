@@ -16,6 +16,16 @@
         min-height: 150px;
         padding: 1rem;
         border-radius: 8px;
-        border: 2px dashed #208e58;
+        border: 1px dashed #ffffff;
+        font-size: 1.3rem;
+        font-weight: 200;
+        transition: 1s all;
+    }
+
+    .add-job:hover {
+        border: 1px solid white;
+        font-weight: 600;
+        transition: 1s all;
+        background-color: #222229ff;
     }
 }
