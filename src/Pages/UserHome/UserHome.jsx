@@ -30,7 +30,7 @@ export default function UserHome() {
         destroyOnClose={true}
       >
         {/* <JobForm handleShowModal={handleShowModal} setJobs={setJobs} /> */}
-        <BlankJob setJobs={setJobs} />
+        <BlankJob setJobs={setJobs} jobs={jobs} handleShowModal={handleShowModal} />
       </Modal>
     </div>
   );

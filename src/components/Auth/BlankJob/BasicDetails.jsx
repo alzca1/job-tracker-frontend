@@ -18,7 +18,7 @@ const statusOptions = [
 const now = dayjs();
 const dateFormat = "DD/MM/YYYY";
 
-export default function BasicDetails({ formStatus, setDataToBeSaved }) {
+export default function BasicDetails({ formStatus, setJobs, jobs, handleShowModal }) {
   const [formValues, setFormValues] = useState({
     position: "",
     companyName: "",
@@ -44,7 +44,12 @@ export default function BasicDetails({ formStatus, setDataToBeSaved }) {
       );
     },
     onSuccess: (data, variables, context) => {
-      console.log(data);
+      debugger;
+      // setJobs(prevState => )
+      console.log(jobs);
+      console.log("new Application", data.data.newApplication);
+      setJobs((prevState) => [...prevState, data.data.newApplication]);
+      handleShowModal();
     },
   });
 
@@ -63,7 +68,6 @@ export default function BasicDetails({ formStatus, setDataToBeSaved }) {
 
   const handleFieldChange = (event) => {
     if (event == "pending" || event == "interview" || event == "accepted" || event == "rejected") {
-      debugger;
       return setFormValues({
         ...formValues,
         status: event,

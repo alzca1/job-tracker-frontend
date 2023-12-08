@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import Requirements from "./Requirements";
 import BasicDetails from "./BasicDetails";
 
-export default function BlankJob({ setJobs }) {
+export default function BlankJob({ setJobs, jobs, handleShowModal }) {
   const [carouselStatus, setCarouselStatus] = useState("idle");
 
   const [dataToBeSaved, setDataToBeSaved] = useState({
@@ -46,6 +46,8 @@ export default function BlankJob({ setJobs }) {
           formStatus={carouselStatus}
           setDataToBeSaved={setDataToBeSaved}
           setJobs={setJobs}
+          jobs={jobs}
+          handleShowModal={handleShowModal}
         />
         <Requirements />
 
