@@ -5,6 +5,7 @@ import { getToken } from "../../helpers/auth";
 import { useMutation } from "react-query";
 import { CloseOutlined, SaveOutlined } from "@ant-design/icons";
 import axios from "axios";
+import InputField from "../FormFields/InputField";
 
 export default function EditableJob({ jobDetails, setJob, setIsModalOpen, setTemporaryStatus }) {
   console.log("jobDetails", jobDetails);
@@ -72,22 +73,19 @@ export default function EditableJob({ jobDetails, setJob, setIsModalOpen, setTem
       <Form onFinish={handleSubmit} name="editable-job-form">
         <div className="editable-job-card">
           <div className="editable-job-info">
-            <Form.Item name="position">
-              <input
-                className="positionInput"
-                placeholder="Position"
-                defaultValue={position}
-                name="position"
-              />
-            </Form.Item>
-            <Form.Item name="companyName">
-              <input
-                className="companyNameInput"
-                placeholder="Company Name"
-                defaultValue={companyName}
-                name="companyName"
-              />
-            </Form.Item>
+            <InputField
+              name="position"
+              placeholder="Position"
+              defaultValue={position}
+              className="positionInput"
+            />
+
+            <InputField
+              className="companyNameInput"
+              placeholder="Company Name"
+              defaultValue={companyName}
+              name="companyName"
+            />
           </div>
           <div className="editable-job-status-date">
             <Form.Item name="status">
