@@ -37,23 +37,13 @@ export default function BlankJob({ setJobs, jobs, handleShowModal }) {
 
   return (
     <div>
-      <Carousel
-        afterChange={handleChangeSlide}
-        style={{ padding: "3rem 0rem !important" }}
-        fade={true}
-      >
-        <BasicDetails
-          formStatus={carouselStatus}
-          setDataToBeSaved={setDataToBeSaved}
-          setJobs={setJobs}
-          jobs={jobs}
-          handleShowModal={handleShowModal}
-        />
-        <Requirements />
-
-        <div>Notas</div>
-        <div>Slide 5</div>
-      </Carousel>
+      <BasicDetails
+        formStatus={carouselStatus}
+        setDataToBeSaved={setDataToBeSaved}
+        setJobs={setJobs}
+        jobs={jobs}
+        handleShowModal={handleShowModal}
+      />
     </div>
   );
 }

@@ -5,7 +5,7 @@ import useFormInstance from "antd/es/form/hooks/useFormInstance";
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { useMutation } from "react-query";
-import { getToken } from "../../../helpers/auth";
+import { getToken } from "../../helpers/auth";
 import axios from "axios";
 
 const statusOptions = [
