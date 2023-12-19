@@ -1,11 +1,11 @@
 import React from "react";
-import { Form } from "antd";
+import { Form, Input } from "antd";
 
 export default function InputField(props) {
   const { name, className, placeholder, defaultValue } = props;
   return (
     <Form.Item name={name}>
-      <input
+      <Input
         className={className}
         placeholder={placeholder}
         defaultValue={defaultValue}
