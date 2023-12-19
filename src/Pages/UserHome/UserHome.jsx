@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Modal } from "antd";
 import { getToken } from "../../helpers/auth";
-import JobForm from "../../components/JobForm/JobForm";
 import JobPanel from "../../components/JobPanel/JobPanel";
-import BlankJob from "../../components/Auth/BlankJob/BlankJob";
+import InitialJobForm from "../../components/Forms/InitialJobForm";
 
 export default function UserHome() {
   const userInfo = getToken();
@@ -22,15 +21,13 @@ export default function UserHome() {
 
       <Modal
         className="addJobModal"
-        title="Add job"
         open={isModalOpen}
         maskClosable={true}
         footer={null}
         onCancel={handleShowModal}
         destroyOnClose={true}
       >
-        {/* <JobForm handleShowModal={handleShowModal} setJobs={setJobs} /> */}
-        <BlankJob setJobs={setJobs} jobs={jobs} handleShowModal={handleShowModal} />
+        <InitialJobForm handleShowModal={handleShowModal} setJobs={setJobs} />
       </Modal>
     </div>
   );
