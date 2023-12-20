@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { formatDate } from "../../helpers/date";
 import { ConfigProvider, Modal, Select } from "antd";
-import EditableJob from "../EditableJob/EditableJob";
+import InitialJobForm from "../Forms/InitialJobForm";
 
 export default function Job({ jobData, setJobs }) {
   const { companyName, position, dateApplied, status, jobUrl, _id, userId } = jobData;
@@ -69,14 +69,7 @@ export default function Job({ jobData, setJobs }) {
         closeIcon={false}
         // className="job-edit"
         styles={modalStyles}
-      >
-        <EditableJob
-          jobDetails={job}
-          setJob={setJob}
-          setIsModalOpen={setIsModalOpen}
-          setTemporaryStatus={setTemporaryStatus}
-        />
-      </Modal>
+      ></Modal>
     </div>
   );
 }
