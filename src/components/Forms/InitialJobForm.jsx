@@ -6,7 +6,6 @@ import StatusSelect from "../FormFields/StatusSelect";
 import { useMutation } from "react-query";
 import axios from "axios";
 import { getToken } from "../../helpers/auth";
-import { set } from "react-hook-form";
 
 const status = ["pending", "interview", "accepted", "rejected"];
 export default function InitialJobForm({ handleShowModal, setJobs }) {
