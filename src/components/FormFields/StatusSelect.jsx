@@ -1,10 +1,9 @@
 import { Select } from "antd";
-import React from "react";
 
-export default function StatusSelect() {
+export default function StatusSelect({ defaultValue }) {
   const status = ["pending", "interview", "accepted", "rejected"];
   return (
-    <Select style={{ width: "100%" }}>
+    <Select style={{ width: "100%" }} defaultValue={defaultValue}>
       {status.map((status) => (
         <Select.Option key={status} value={status}>
           {status}
