@@ -1,20 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { formatDate } from "../../helpers/date";
-import { ConfigProvider, Modal, Select } from "antd";
-import InitialJobForm from "../Forms/InitialJobForm";
+import { Modal } from "antd";
+import EditableJob from "../EditableJob/EditableJob";
 
 export default function Job({ jobData, setJobs }) {
-  const { companyName, position, dateApplied, status, jobUrl, _id, userId } = jobData;
+  const { companyName, position, dateApplied, status } = jobData;
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [job, setJob] = useState({
-    _id: _id,
-    companyName: companyName,
-    position: position,
-    dateApplied: dateApplied,
-    status: status,
-    jobUrl: jobUrl,
-    userId: userId,
-  });
 
   const [temporaryStatus, setTemporaryStatus] = useState(status);
 
@@ -50,15 +41,15 @@ export default function Job({ jobData, setJobs }) {
     <div
       className="Job"
       onDoubleClick={() => setIsModalOpen(true)}
-      style={{ backgroundColor: stateColors[job.status] }}
+      style={{ backgroundColor: stateColors[status] }}
     >
       <div className="job-info">
-        <span>{job?.position || "N/A"}</span>
-        <span>{job?.companyName || "N/A"}</span>
+        <span>{position || "N/A"}</span>
+        <span>{companyName || "N/A"}</span>
       </div>
       <div className="job-status-date">
-        <span>{job?.status || "N/A"}</span>
-        <span>{formatDate(job?.dateApplied) || "N/A"}</span>
+        <span>{status || "N/A"}</span>
+        <span>{formatDate(dateApplied) || "N/A"}</span>
       </div>
       <Modal
         open={isModalOpen}
@@ -69,7 +60,9 @@ export default function Job({ jobData, setJobs }) {
         closeIcon={false}
         // className="job-edit"
         styles={modalStyles}
-      ></Modal>
+      >
+        <EditableJob jobData={jobData} setJobs={setJobs} />
+      </Modal>
     </div>
   );
 }
