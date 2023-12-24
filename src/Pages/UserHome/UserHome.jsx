@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button, Modal } from "antd";
+import { useState } from "react";
+import { Modal } from "antd";
 import { getToken } from "../../helpers/auth";
 import JobPanel from "../../components/JobPanel/JobPanel";
-import InitialJobForm from "../../components/Forms/InitialJobForm";
+import InitialJobDetailsForm from "../../components/Forms/InitialJobDetailsForm";
 
 export default function UserHome() {
   const userInfo = getToken();
@@ -27,7 +26,7 @@ export default function UserHome() {
         onCancel={handleShowModal}
         destroyOnClose={true}
       >
-        <InitialJobForm handleShowModal={handleShowModal} setJobs={setJobs} />
+        <InitialJobDetailsForm handleShowModal={handleShowModal} setJobs={setJobs} />
       </Modal>
     </div>
   );
