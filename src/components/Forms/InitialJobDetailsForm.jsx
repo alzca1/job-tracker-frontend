@@ -6,7 +6,7 @@ import { useMutation } from "react-query";
 import axios from "axios";
 import { getToken } from "../../helpers/auth";
 
-export default function InitialJobForm({ handleShowModal, setJobs }) {
+export default function InitialJobDetailsForm({ handleShowModal, setJobs }) {
   const headers = {
     headers: {
       "Content-Type": "application/json",
@@ -36,7 +36,7 @@ export default function InitialJobForm({ handleShowModal, setJobs }) {
   };
 
   return (
-    <div className="InitialJobForm">
+    <div className="InitialJobDetailsForm">
       <Form onFinish={handleSubmit}>
         <InputField name="position" placeholder="Enter position" className="" />
         <InputField name="companyName" placeholder="Enter company name" className="" />
