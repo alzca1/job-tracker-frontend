@@ -3,9 +3,17 @@ import { formatDate } from "../../helpers/date";
 import { Modal } from "antd";
 import EditableJob from "../EditableJob/EditableJob";
 
-export default function Job({ jobData, setJobs }) {
-  const { companyName, position, dateApplied, status } = jobData;
+export default function Job({ jobData }) {
+  const { _id, companyName, position, dateApplied, status } = jobData;
+
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [jobDetails, setJobDetails] = useState({
+    _id: _id,
+    companyName: companyName || "",
+    position: position || "",
+    dateApplied: dateApplied || "",
+    status: status || "",
+  });
 
   const [temporaryStatus, setTemporaryStatus] = useState(status);
 
@@ -44,12 +52,12 @@ export default function Job({ jobData, setJobs }) {
       style={{ backgroundColor: stateColors[status] }}
     >
       <div className="job-info">
-        <span>{position || "N/A"}</span>
-        <span>{companyName || "N/A"}</span>
+        <span>{jobDetails?.position || "N/A"}</span>
+        <span>{jobDetails?.companyName || "N/A"}</span>
       </div>
       <div className="job-status-date">
-        <span>{status || "N/A"}</span>
-        <span>{formatDate(dateApplied) || "N/A"}</span>
+        <span>{jobDetails?.status || "N/A"}</span>
+        <span>{formatDate(jobDetails?.dateApplied) || "N/A"}</span>
       </div>
       <Modal
         open={isModalOpen}
@@ -61,7 +69,7 @@ export default function Job({ jobData, setJobs }) {
         // className="job-edit"
         styles={modalStyles}
       >
-        <EditableJob jobData={jobData} setJobs={setJobs} />
+        <EditableJob jobDetails={jobDetails} setJobDetails={setJobDetails} />
       </Modal>
     </div>
   );

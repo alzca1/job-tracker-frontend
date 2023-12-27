@@ -1,9 +1,9 @@
 import InitialJobDetailsEditForm from "../Forms/InitialJobDetailsEditForm";
 
-export default function EditableJob({ jobData, setJobs }) {
+export default function EditableJob({ jobDetails, setJobDetails }) {
   return (
     <div>
-      <InitialJobDetailsEditForm jobData={jobData} setJobs={setJobs} />
+      <InitialJobDetailsEditForm jobDetails={jobDetails} setJobDetails={setJobDetails} />
     </div>
   );
 }

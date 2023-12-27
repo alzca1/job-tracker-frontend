@@ -7,8 +7,8 @@ import { getToken } from "../../helpers/auth";
 import { useMutation } from "react-query";
 import axios from "axios";
 
-export default function InitialJobDetailsEditForm({ jobData }) {
-  const { position, companyName, status, dateApplied } = jobData;
+export default function InitialJobDetailsEditForm({ jobDetails, setJobDetails }) {
+  const { _id, position, companyName, status, dateApplied } = jobDetails;
 
   const headers = {
     headers: {
@@ -26,8 +26,20 @@ export default function InitialJobDetailsEditForm({ jobData }) {
       );
     },
 
-    onSuccess: (data) => {
-      console.log("job basic details successfully updated", data);
+    onSuccess: (data, variables, context) => {
+      debugger;
+      console.log(
+        "job basic details successfully updated",
+        data,
+        "variables",
+        variables,
+        "context",
+        context
+      );
+      setJobDetails((prevState) => ({
+        ...prevState,
+        ...variables,
+      }));
       // setJobs((prevState) => [...prevState, data.data.newApplication]);
       // handleShowModal();
     },
@@ -38,10 +50,10 @@ export default function InitialJobDetailsEditForm({ jobData }) {
         delete formValues[key];
       }
     }
-    if (jobData._id) {
-      formValues._id = jobData._id;
+    if (jobDetails._id) {
+      formValues._id = jobDetails._id;
     }
-    console.log("form sent!", formValues, jobData);
+    console.log("form sent!", formValues, jobDetails);
     mutation.mutate(formValues);
   };
 
