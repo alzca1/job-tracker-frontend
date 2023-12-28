@@ -26,22 +26,11 @@ export default function InitialJobDetailsEditForm({ jobDetails, setJobDetails })
       );
     },
 
-    onSuccess: (data, variables, context) => {
-      debugger;
-      console.log(
-        "job basic details successfully updated",
-        data,
-        "variables",
-        variables,
-        "context",
-        context
-      );
+    onSuccess: (data, variables) => {
       setJobDetails((prevState) => ({
         ...prevState,
         ...variables,
       }));
-      // setJobs((prevState) => [...prevState, data.data.newApplication]);
-      // handleShowModal();
     },
   });
   const handleSubmit = (formValues) => {
