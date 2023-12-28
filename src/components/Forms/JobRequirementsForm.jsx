@@ -1,6 +1,7 @@
 import { Button, Form, Input, Select } from "antd";
 import { useEffect, useState } from "react";
 import InputField from "../FormFields/InputField";
+import { DeleteOutlined } from "@ant-design/icons";
 
 const options = [
   { value: "experience", label: "Experiencia mínima" },
@@ -37,23 +38,33 @@ export default function JobRequirementsForm() {
     return filteredOptions;
   };
 
+  const removeRequirement = (key) => {
+    const filteredRequirements = [...requirements].filter((requirement) => requirement.key !== key);
+    setRequirements(filteredRequirements);
+  };
+
   return (
     <div>
       <div>
         <h3>Requirements</h3>
         <ul>
           {requirements.map((requirement) => (
-            <li key={requirement.key}>{`${requirement.label}: ${requirement.value}`}</li>
+            <li key={requirement.key}>
+              {`${requirement.label}: ${requirement.value}`}{" "}
+              <DeleteOutlined onClick={() => removeRequirement(requirement.key)} />
+            </li>
           ))}
         </ul>
       </div>
-      <Form onFinish={handleSubmit} form={form}>
-        <Form.Item name="requirement" label="Requirement">
-          <Select labelInValue options={getFilteredOptions()} placeholder="Select option" />
-        </Form.Item>
-        <InputField name="requirementValue" />
-        <Button htmlType="submit">Add Requirement</Button>
-      </Form>
+      {getFilteredOptions().length > 0 && (
+        <Form onFinish={handleSubmit} form={form}>
+          <Form.Item name="requirement" label="Requirement">
+            <Select labelInValue options={getFilteredOptions()} placeholder="Select option" />
+          </Form.Item>
+          <InputField name="requirementValue" />
+          <Button htmlType="submit">Add Requirement</Button>
+        </Form>
+      )}
     </div>
   );
 }
