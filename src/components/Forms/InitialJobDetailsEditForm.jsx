@@ -42,7 +42,6 @@ export default function InitialJobDetailsEditForm({ jobDetails, setJobDetails })
     if (jobDetails._id) {
       formValues._id = jobDetails._id;
     }
-    console.log("form sent!", formValues, jobDetails);
     mutation.mutate(formValues);
   };
 

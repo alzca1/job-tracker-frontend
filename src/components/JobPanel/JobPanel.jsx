@@ -25,7 +25,6 @@ export default function JobPanel({ handleShowModal, jobs, setJobs }) {
 
   const handleGetJobs = () => {
     mutation.mutate();
-    console.log("Get jobs");
   };
 
   return (

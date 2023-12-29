@@ -53,18 +53,12 @@ export default function JobRequirementsForm({ jobDetails: { _id } }) {
     };
     setRequirements((prevState) => [...prevState, requirement]);
     form.resetFields();
-    console.log("requirement added", requirement);
   };
-
-  // useEffect(() => {
-  //   console.log(requirements);
-  // }, [requirements]);
 
   const getFilteredOptions = () => {
     const filteredOptions = options.filter((option) => {
       return !requirements.some((requirement) => requirement.key === option.value);
     });
-    // console.log(filteredOptions);
     return filteredOptions;
   };
 

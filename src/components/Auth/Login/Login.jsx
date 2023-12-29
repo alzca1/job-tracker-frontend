@@ -23,7 +23,6 @@ export default function Login({ handleView }) {
   });
 
   const handleSubmit = (data) => {
-    console.log("data", data);
     mutation.mutate(data);
   };
 
