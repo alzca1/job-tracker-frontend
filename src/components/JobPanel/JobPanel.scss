@@ -1,0 +1,31 @@
+.JobPanel {
+    padding: 4.5rem 3rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+
+    .job-list {
+        margin-top: 1.5rem;
+        padding: 2rem 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .add-job {
+        min-width: 282px;
+        min-height: 150px;
+        padding: 1rem;
+        border-radius: 8px;
+        border: 1px dashed #ffffff;
+        font-size: 1.3rem;
+        font-weight: 200;
+        transition: 1s all;
+    }
+
+    .add-job:hover {
+        border: 1px solid white;
+        font-weight: 600;
+        transition: 1s all;
+        background-color: #222229ff;
+    }
+}

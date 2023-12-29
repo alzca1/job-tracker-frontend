@@ -1,0 +1,25 @@
+.Bar{
+    width: 100svw;
+    align-items: center;
+    padding: 2rem 0; 
+    
+    .bar-logo{
+      display: flex; 
+      align-items: center;
+      padding: 0 2.5rem; 
+      gap: 1rem; 
+
+      img{
+        width: 3rem;
+        border-radius: 10px !important; 
+        
+      }
+
+      span{
+      font-weight: 800;
+      color: #32DE8A;
+
+      }
+    }
+
+  }
