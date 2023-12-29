@@ -1,7 +1,5 @@
 import { Button } from "antd";
-import React, { useState } from "react";
 import { useMutation } from "react-query";
-import axiosInstance from "../../helpers/instance";
 import Job from "../Job/Job";
 import axios from "axios";
 import { getToken } from "../../helpers/auth";
@@ -18,7 +16,7 @@ export default function JobPanel({ handleShowModal, jobs, setJobs }) {
     mutationFn: () => {
       return axios.get(`${import.meta.env.VITE_BACKEND_URL}/application/getAll`, headers);
     },
-    onSuccess: (data, variables, context) => {
+    onSuccess: (data) => {
       setJobs(data.data);
     },
   });

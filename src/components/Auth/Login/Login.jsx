@@ -1,18 +1,17 @@
-import React, { useContext, useEffect } from "react";
 import { Button, Form, Input } from "antd";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import axios from "axios";
 
-export default function Login({ handleView }) {
+export default function Login() {
   const navigate = useNavigate();
 
   const mutation = useMutation({
     mutationFn: (userLogin) => {
       return axios.post(`${import.meta.env.VITE_BACKEND_URL}/login`, userLogin);
     },
-    onSuccess: (data, variables, context) => {
+    onSuccess: (data) => {
       const { token, name, email } = data.data;
       sessionStorage.setItem("user", JSON.stringify({ token: token, user: email, name: name }));
       navigate("/home");
