@@ -1,14 +1,16 @@
-import { Select } from "antd";
+import { Form, Select } from "antd";
 
-export default function StatusSelect({ defaultValue }) {
+export default function StatusSelect() {
   const status = ["pending", "interview", "accepted", "rejected"];
   return (
-    <Select style={{ width: "100%" }} defaultValue={defaultValue}>
-      {status.map((status) => (
-        <Select.Option key={status} value={status}>
-          {status}
-        </Select.Option>
-      ))}
-    </Select>
+    <Form.Item name="status">
+      <Select style={{ width: "100%" }}>
+        {status.map((status) => (
+          <Select.Option key={status} value={status}>
+            {status}
+          </Select.Option>
+        ))}
+      </Select>
+    </Form.Item>
   );
 }
