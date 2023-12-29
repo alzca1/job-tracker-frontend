@@ -6,6 +6,7 @@ import { SaveOutlined } from "@ant-design/icons";
 import { getToken } from "../../helpers/auth";
 import { useMutation } from "react-query";
 import axios from "axios";
+import dayjs from "dayjs";
 
 export default function InitialJobDetailsEditForm({ jobDetails, setJobDetails }) {
   const { _id, position, companyName, status, dateApplied } = jobDetails;
@@ -47,24 +48,22 @@ export default function InitialJobDetailsEditForm({ jobDetails, setJobDetails })
 
   return (
     <div className="InitialJobDetailsForm">
-      <Form onFinish={handleSubmit}>
+      <Form
+        onFinish={handleSubmit}
+        initialValues={{
+          position: position,
+          companyName: companyName,
+          status: status,
+          dateApplied: dayjs(dateApplied),
+        }}
+      >
         <Button htmlType="submit">
           <SaveOutlined />
         </Button>
-        <InputField
-          name="position"
-          placeholder="Enter position"
-          className=""
-          defaultValue={position}
-        />
-        <InputField
-          name="companyName"
-          placeholder="Enter company name"
-          className=""
-          defaultValue={companyName}
-        />
-        <StatusSelect defaultValue={status} />
-        <DateField name="dateApplied" defaultValue={dateApplied} />
+        <InputField name="position" placeholder="Enter position" className="" />
+        <InputField name="companyName" placeholder="Enter company name" className="" />
+        <StatusSelect />
+        <DateField name="dateApplied" />
       </Form>
     </div>
   );
