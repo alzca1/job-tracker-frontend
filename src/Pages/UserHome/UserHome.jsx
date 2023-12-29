@@ -1,14 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Button, Modal } from "antd";
+import { useState } from "react";
+import { Modal } from "antd";
 import { getToken } from "../../helpers/auth";
-import JobForm from "../../components/JobForm/JobForm";
-import { useMutation } from "react-query";
+import JobPanel from "../../components/JobPanel/JobPanel";
+import InitialJobDetailsForm from "../../components/Forms/InitialJobDetailsForm";
 
 export default function UserHome() {
-  const navigate = useNavigate();
   const userInfo = getToken();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [jobs, setJobs] = useState([]);
 
   const handleShowModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -17,19 +16,17 @@ export default function UserHome() {
   return (
     <div className="UserHome">
       <h2>Welcome back, {userInfo.name}!</h2>
-      <Button type="primary" onClick={handleShowModal}>
-        Add Job
-      </Button>
+      <JobPanel handleShowModal={handleShowModal} jobs={jobs} setJobs={setJobs} />
+
       <Modal
         className="addJobModal"
-        title="Add job"
         open={isModalOpen}
         maskClosable={true}
         footer={null}
         onCancel={handleShowModal}
         destroyOnClose={true}
       >
-        <JobForm handleShowModal={handleShowModal} />
+        <InitialJobDetailsForm handleShowModal={handleShowModal} setJobs={setJobs} />
       </Modal>
     </div>
   );

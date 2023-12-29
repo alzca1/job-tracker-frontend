@@ -1,8 +1,8 @@
 import axios from "axios";
 import { getToken } from "./auth";
-const { token } = getToken();
+const sessionInfo = getToken();
+const token = sessionInfo?.token;
 const bearer = `Bearer ${token}`;
-console.log("bearer", bearer);
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,

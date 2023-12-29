@@ -7,13 +7,13 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function SignUp({ handleView }) {
   const navigate = useNavigate();
-  const { authenticateUser, userAuthenticated } = useAuth();
+  // const { authenticateUser, userAuthenticated } = useAuth();
 
-  useEffect(() => {
-    if (userAuthenticated) {
-      navigate("/home");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (userAuthenticated) {
+  //     navigate("/home");
+  //   }
+  // }, []);
 
   const mutation = useMutation({
     mutationFn: (userCreation) => {

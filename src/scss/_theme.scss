@@ -1,11 +1,11 @@
-@import '../App.scss';
-
+@import "../App.scss";
 
 //Components
-@import '/src/components/Root/Root.scss';
-@import '../components/Auth/Sign.scss';
-@import '/src/Pages/ErrorPage/ErrorPage.scss';
-@import '/src/Pages/Home/Home.scss';
-@import '/src/components/Navbar/Navbar.scss';
-@import '/src/Pages/UserHome/UserHome.scss';
-@import '/src/components/JobForm/JobForm.scss'
+@import "/src/components/Root/Root.scss";
+@import "../components/Auth/Sign.scss";
+@import "/src/Pages/ErrorPage/ErrorPage.scss";
+@import "/src/Pages/Home/Home.scss";
+@import "/src/components/Navbar/Navbar.scss";
+@import "/src/Pages/UserHome/UserHome.scss";
+@import "/src/components/JobPanel/JobPanel.scss";
+@import "src/components/Job/Job.scss";
