@@ -13,8 +13,17 @@ const options = [
   { value: "availabilityRequired", label: "Disponibilidad" },
   { value: "languagesRequired", label: "Idiomas" },
 ];
-export default function JobRequirementsForm({ jobDetails: { _id } }) {
-  const [requirements, setRequirements] = useState([]);
+
+const labels = {
+  minimumExperience: "Experiencia mínima",
+  educationRequired: "Estudios mínimos",
+  residenceRequired: "Residencia",
+  availabilityRequired: "Disponibilidad",
+  languagesRequired: "Idiomas",
+};
+
+export default function JobRequirementsForm({ _id, jobRequirements }) {
+  const [requirements, setRequirements] = useState(jobRequirements || []);
   const [valuesAdded, setValuesAdded] = useState(false);
   const [form] = Form.useForm();
 
@@ -44,6 +53,7 @@ export default function JobRequirementsForm({ jobDetails: { _id } }) {
   });
 
   const handleSubmit = (formValues) => {
+    debugger;
     setValuesAdded(true);
 
     const requirement = {
@@ -56,8 +66,12 @@ export default function JobRequirementsForm({ jobDetails: { _id } }) {
   };
 
   const getFilteredOptions = () => {
+    const filteredRequirements = Object.entries(requirements).map(([key, value]) => {
+      return { [key]: value };
+    });
+    console.log("filteredRequirements", filteredRequirements);
     const filteredOptions = options.filter((option) => {
-      return !requirements.some((requirement) => requirement.key === option.value);
+      return !filteredRequirements.some((requirement) => requirement.key === option.value);
     });
     return filteredOptions;
   };
@@ -84,12 +98,16 @@ export default function JobRequirementsForm({ jobDetails: { _id } }) {
       ) : null}
       <div>
         <ul>
-          {requirements.map((requirement) => (
-            <li key={requirement.key}>
-              {`${requirement.label}: ${requirement.value}`}{" "}
-              <DeleteOutlined onClick={() => removeRequirement(requirement.key)} />
-            </li>
-          ))}
+          {Object.entries(jobRequirements).map(([key, value]) => {
+            console.log(key, value);
+            if (value)
+              return (
+                <li key={key}>
+                  {`${labels[key]}:${value}`}
+                  <DeleteOutlined onClick={() => removeRequirement(key)} />
+                </li>
+              );
+          })}
         </ul>
       </div>
       {getFilteredOptions().length > 0 && (
@@ -104,3 +122,11 @@ export default function JobRequirementsForm({ jobDetails: { _id } }) {
     </div>
   );
 }
+
+// 1)Tenemos un state en forma de objeto:
+//{minimumExperience: "3 years", ...}
+// 2) Debemos tener un objeto "labels" o array de objetos "labels" que contengan
+// la llave del state y el label que se ha de utilizar
+// 3) Cuando se renderiza el componente, debemos recorrer
+// el state y generar un span para cada propiedad que tenga
+// valor
