@@ -22,7 +22,7 @@ const labels = {
   languagesRequired: "Idiomas",
 };
 
-export default function JobRequirementsForm({ _id, jobRequirements }) {
+export default function JobRequirementsForm({ _id, jobRequirements, setJobRequirements }) {
   const [requirements, setRequirements] = useState(jobRequirements || []);
   const [valuesAdded, setValuesAdded] = useState(false);
   const [form] = Form.useForm();
@@ -66,19 +66,26 @@ export default function JobRequirementsForm({ _id, jobRequirements }) {
   };
 
   const getFilteredOptions = () => {
-    const filteredRequirements = Object.entries(requirements).map(([key, value]) => {
-      return { [key]: value };
-    });
+    const filteredRequirements = Object.keys(jobRequirements);
     console.log("filteredRequirements", filteredRequirements);
     const filteredOptions = options.filter((option) => {
-      return !filteredRequirements.some((requirement) => requirement.key === option.value);
+      return !filteredRequirements.some((requirement) => requirement === option.value);
     });
+    console.log("filteredOptions", filteredOptions);
     return filteredOptions;
   };
 
   const removeRequirement = (key) => {
-    const filteredRequirements = [...requirements].filter((requirement) => requirement.key !== key);
-    setRequirements(filteredRequirements);
+    // const filteredRequirements = [...jobRequirements].filter(
+    //   (requirement) => requirement.key !== key
+    // );
+    const filteredRequirements = { ...jobRequirements };
+    for (let requirement in filteredRequirements) {
+      if (requirement === key) {
+        delete filteredRequirements[requirement];
+      }
+    }
+    setJobRequirements(filteredRequirements);
     if (filteredRequirements.length === 0) {
       setValuesAdded(false);
     }

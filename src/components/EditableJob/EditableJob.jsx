@@ -51,7 +51,11 @@ export default function EditableJob({ jobDetails, setJobDetails }) {
           <InitialJobDetailsEditForm jobDetails={jobDetails} setJobDetails={setJobDetails} />
         </div>
         <div>
-          <JobRequirementsForm jobRequirements={requirements} _id={jobDetails?._id} />
+          <JobRequirementsForm
+            jobRequirements={requirements}
+            _id={jobDetails?._id}
+            setJobRequirements={setRequirements}
+          />
         </div>
       </Carousel>
     </div>
