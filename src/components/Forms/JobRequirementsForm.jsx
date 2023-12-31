@@ -35,13 +35,16 @@ export default function JobRequirementsForm({ _id, jobRequirements, setJobRequir
   };
 
   const mutation = useMutation({
-    mutationFn: (requirements) => {
+    mutationFn: (data) => {
+      console.log("data in mutation", data);
       const refinedRequirements = {
         _id: _id,
       };
-      for (let requirement of requirements) {
-        refinedRequirements[requirement.key] = requirement.value;
+      for (let requirement in data) {
+        console.log("requirement", requirement);
+        refinedRequirements[requirement] = data[requirement];
       }
+      console.log("refinedRequirements", refinedRequirements);
 
       // hay que cocinar los requirements aquí
       return axios.put(
@@ -53,25 +56,18 @@ export default function JobRequirementsForm({ _id, jobRequirements, setJobRequir
   });
 
   const handleSubmit = (formValues) => {
-    debugger;
     setValuesAdded(true);
 
-    const requirement = {
-      key: formValues.requirement.key,
-      label: formValues.requirement.label,
-      value: formValues.requirementValue,
-    };
-    setRequirements((prevState) => [...prevState, requirement]);
+    setJobRequirements((prevState) => ({
+      ...prevState,
+      [formValues.requirement.key]: formValues.requirementValue,
+    }));
+
     form.resetFields();
   };
 
   const getFilteredOptions = () => {
-    const filteredRequirements = Object.keys(jobRequirements);
-    console.log("filteredRequirements", filteredRequirements);
-    const filteredOptions = options.filter((option) => {
-      return !filteredRequirements.some((requirement) => requirement === option.value);
-    });
-    console.log("filteredOptions", filteredOptions);
+    const filteredOptions = options.filter((option) => jobRequirements[option.value] == "");
     return filteredOptions;
   };
 
@@ -82,7 +78,7 @@ export default function JobRequirementsForm({ _id, jobRequirements, setJobRequir
     const filteredRequirements = { ...jobRequirements };
     for (let requirement in filteredRequirements) {
       if (requirement === key) {
-        delete filteredRequirements[requirement];
+        filteredRequirements[requirement] = "";
       }
     }
     setJobRequirements(filteredRequirements);
@@ -92,7 +88,7 @@ export default function JobRequirementsForm({ _id, jobRequirements, setJobRequir
   };
 
   const handleSaveRequirements = () => {
-    mutation.mutate(requirements);
+    mutation.mutate(jobRequirements);
   };
 
   return (
@@ -106,7 +102,6 @@ export default function JobRequirementsForm({ _id, jobRequirements, setJobRequir
       <div>
         <ul>
           {Object.entries(jobRequirements).map(([key, value]) => {
-            console.log(key, value);
             if (value)
               return (
                 <li key={key}>
@@ -117,7 +112,7 @@ export default function JobRequirementsForm({ _id, jobRequirements, setJobRequir
           })}
         </ul>
       </div>
-      {getFilteredOptions().length > 0 && (
+      {Object.values(jobRequirements).some((value) => value == "") && (
         <Form onFinish={handleSubmit} form={form}>
           <Form.Item name="requirement" label="Requirement">
             <Select labelInValue options={getFilteredOptions()} placeholder="Select option" />
