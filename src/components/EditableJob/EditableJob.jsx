@@ -14,6 +14,7 @@ export default function EditableJob({ jobDetails, setJobDetails }) {
     availabilityRequired: "",
     languagesRequired: "",
   });
+
   const headers = {
     headers: {
       "Content-Type": "application/json",
@@ -21,33 +22,31 @@ export default function EditableJob({ jobDetails, setJobDetails }) {
     },
   };
 
-  const { isLoading, data } = useQuery(
-    "jobInfo",
-    async () => {
-      const details = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/application/${jobDetails?._id}`,
-        headers
-      );
+  const fetchRequirements = async () => {
+    const details = await axios.get(
+      `${import.meta.env.VITE_BACKEND_URL}/application/${jobDetails?._id}`,
+      headers
+    );
+    setRequirements({
+      minimumExperience: details?.data?.minimumExperience,
+      educationRequired: details?.data?.educationRequired,
+      residenceRequired: details?.data?.residenceRequired,
+      availabilityRequired: details?.data?.availabilityRequired,
+      languagesRequired: details?.data?.languagesRequired,
+    });
+  };
 
-      //TODO:  qué pasa si el status no es 200???
-      if (details.status === 200) {
-        setRequirements({
-          minimumExperience: details?.data?.minimumExperience,
-          educationRequired: details?.data?.educationRequired,
-          residenceRequired: details?.data?.residenceRequired,
-          availabilityRequired: details?.data?.availabilityRequired,
-          languagesRequired: details?.data?.languagesRequired,
-        });
-      }
-    },
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { status } = useQuery("jobInfo", fetchRequirements, {
+    refetchOnWindowFocus: false,
+  });
 
-  useEffect(() => {
-    console.log("requirements in EditableJob", requirements);
-  }, [requirements]);
+  if (status === "loading") {
+    return <span>Loading...</span>;
+  }
+
+  if (status === "error") {
+    return <span>There was an error while fetching the data...</span>;
+  }
 
   return (
     <div>
