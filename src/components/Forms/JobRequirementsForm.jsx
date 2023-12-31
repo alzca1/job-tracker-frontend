@@ -23,7 +23,6 @@ const labels = {
 };
 
 export default function JobRequirementsForm({ _id, jobRequirements, setJobRequirements }) {
-  const [requirements, setRequirements] = useState(jobRequirements || []);
   const [valuesAdded, setValuesAdded] = useState(false);
   const [form] = Form.useForm();
 
@@ -36,15 +35,12 @@ export default function JobRequirementsForm({ _id, jobRequirements, setJobRequir
 
   const mutation = useMutation({
     mutationFn: (data) => {
-      console.log("data in mutation", data);
       const refinedRequirements = {
         _id: _id,
       };
       for (let requirement in data) {
-        console.log("requirement", requirement);
         refinedRequirements[requirement] = data[requirement];
       }
-      console.log("refinedRequirements", refinedRequirements);
 
       // hay que cocinar los requirements aquí
       return axios.put(
@@ -72,9 +68,6 @@ export default function JobRequirementsForm({ _id, jobRequirements, setJobRequir
   };
 
   const removeRequirement = (key) => {
-    // const filteredRequirements = [...jobRequirements].filter(
-    //   (requirement) => requirement.key !== key
-    // );
     const filteredRequirements = { ...jobRequirements };
     for (let requirement in filteredRequirements) {
       if (requirement === key) {
