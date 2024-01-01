@@ -63,7 +63,12 @@ export default function JobRequirementsForm({ _id, jobRequirements, setJobRequir
   };
 
   const getFilteredOptions = () => {
-    const filteredOptions = options.filter((option) => jobRequirements[option.value] == "");
+    let filteredOptions = {};
+
+    if (Object.keys(jobRequirements).length > 0) {
+      filteredOptions = options.filter((option) => jobRequirements[option.value] == "");
+    }
+
     return filteredOptions;
   };
 
