@@ -7,13 +7,7 @@ import { getToken } from "../../helpers/auth";
 import { useEffect, useState } from "react";
 
 export default function EditableJob({ jobDetails, setJobDetails }) {
-  const [requirements, setRequirements] = useState({
-    minimumExperience: "",
-    educationRequired: "",
-    residenceRequired: "",
-    availabilityRequired: "",
-    languagesRequired: "",
-  });
+  const [requirements, setRequirements] = useState({});
 
   const headers = {
     headers: {
@@ -41,25 +35,30 @@ export default function EditableJob({ jobDetails, setJobDetails }) {
   });
 
   if (status === "loading") {
+    console.log("loading");
     return <span>Loading...</span>;
   }
 
   if (status === "error") {
+    console.log("loading error");
     return <span>There was an error while fetching the data...</span>;
   }
 
   return (
     <div>
+      {console.log("content loaded")}
       <Carousel>
         <div>
           <InitialJobDetailsEditForm jobDetails={jobDetails} setJobDetails={setJobDetails} />
         </div>
         <div>
-          <JobRequirementsForm
-            jobRequirements={requirements}
-            _id={jobDetails?._id}
-            setJobRequirements={setRequirements}
-          />
+          {Object.keys(requirements).length && (
+            <JobRequirementsForm
+              jobRequirements={requirements}
+              _id={jobDetails?._id}
+              setJobRequirements={setRequirements}
+            />
+          )}
         </div>
       </Carousel>
     </div>
