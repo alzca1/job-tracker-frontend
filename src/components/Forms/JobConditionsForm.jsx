@@ -1,5 +1,5 @@
-import { Button, Form, Tag } from "antd";
-import { useEffect, useState } from "react";
+import { Button, Form } from "antd";
+import { useEffect } from "react";
 import InputField from "../FormFields/InputField";
 import { PlusCircleOutlined, SaveOutlined } from "@ant-design/icons";
 import { getToken } from "../../helpers/auth";

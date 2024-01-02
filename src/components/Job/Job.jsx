@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { formatDate } from "../../helpers/date";
 import { Modal } from "antd";
 import EditableJob from "../EditableJob/EditableJob";
