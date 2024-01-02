@@ -63,7 +63,7 @@ export default function EditableJob({ jobDetails, setJobDetails }) {
           )}
         </div>
         <div>
-          <JobConditionsForm />
+          <JobConditionsForm  _id={jobDetails?._id} />
         </div>
       </Carousel>
     </div>
