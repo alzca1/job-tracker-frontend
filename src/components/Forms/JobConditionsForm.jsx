@@ -1,5 +1,5 @@
 import { Button, Form, Tag } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InputField from "../FormFields/InputField";
 import { PlusCircleOutlined, SaveOutlined } from "@ant-design/icons";
 import { getToken } from "../../helpers/auth";
@@ -7,8 +7,8 @@ import { useMutation } from "react-query";
 import axios from "axios";
 import Chip from "../Chip/Chip";
 
-export default function JobConditionsForm({ _id }) {
-  const [perks, setPerks] = useState([]);
+export default function JobConditionsForm({ _id, jobConditions, setJobConditions }) {
+  const { salary, variable, perks } = jobConditions;
   const [form] = Form.useForm();
 
   const headers = {
@@ -20,13 +20,12 @@ export default function JobConditionsForm({ _id }) {
 
   const mutation = useMutation({
     mutationFn: (data) => {
-      let refinedRequirements;
       return axios.put(`${import.meta.env.VITE_BACKEND_URL}/application/update`, data, headers);
     },
   });
 
   const handleSubmit = (formValues) => {
-    formValues.perk = perks;
+    formValues.socialBenefits = perks;
     formValues._id = _id;
     console.log(formValues);
     mutation.mutate(formValues);
@@ -34,23 +33,31 @@ export default function JobConditionsForm({ _id }) {
 
   const addPerk = () => {
     const perkFieldValue = form.getFieldValue("perk");
-    if (perks.includes(perkFieldValue)) {
+    if (jobConditions.includes(perkFieldValue)) {
       return;
     }
-    setPerks((prevState) => [...prevState, perkFieldValue]);
+    setJobConditions((prevState) => [...prevState, perkFieldValue]);
     form.resetFields(["perk"]);
   };
 
   const removePerk = (perk) => {
-    const filteredPerks = perks.filter((p) => p !== perk);
-    setPerks(filteredPerks);
+    const filteredPerks = jobConditions.filter((p) => p !== perk);
+    setJobConditions(filteredPerks);
   };
   const sharedStyles = { display: "flex" };
+
+  useEffect(() => {
+    console.log("jobConditions", jobConditions);
+  }, [jobConditions]);
 
   return (
     <div>
       <h3>Conditions</h3>
-      <Form onFinish={handleSubmit} form={form}>
+      <Form
+        onFinish={handleSubmit}
+        form={form}
+        initialValues={{ salary: salary, variable: variable }}
+      >
         <Button htmlType="submit">
           <SaveOutlined />
         </Button>
@@ -66,18 +73,10 @@ export default function JobConditionsForm({ _id }) {
         </div>
       </Form>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {perks.map((perk, index) => (
-          // <Tag
-          //   key={`${perk}${index}`}
-          //   style={{ border: "1px solid white !important", backgroundColor: "white !important" }}
-          //   closeIcon
-          //   onClose={() => removePerk(perk)}
-          //   bordered={true}
-          // >
-          //   {perk}
-          // </Tag>
-          <Chip text={perk} callback={removePerk} key={`${perk}${index}`} />
-        ))}
+        {jobConditions.perks.length &&
+          jobConditions.perks.map((perk, index) => (
+            <Chip text={perk} callback={removePerk} key={`${perk}${index}`} />
+          ))}
       </div>
     </div>
   );

@@ -23,6 +23,7 @@ export default function EditableJob({ jobDetails, setJobDetails }) {
       `${import.meta.env.VITE_BACKEND_URL}/application/${jobDetails?._id}`,
       headers
     );
+
     setRequirements({
       minimumExperience: details?.data?.minimumExperience,
       educationRequired: details?.data?.educationRequired,
@@ -30,7 +31,17 @@ export default function EditableJob({ jobDetails, setJobDetails }) {
       availabilityRequired: details?.data?.availabilityRequired,
       languagesRequired: details?.data?.languagesRequired,
     });
+
+    setConditions({
+      salary: details?.data?.salary,
+      variable: details?.data?.variable,
+      perks: details?.data?.socialBenefits,
+    });
   };
+
+  useEffect(() => {
+    console.log("conditions", conditions);
+  }, [conditions]);
 
   const { status } = useQuery("jobInfo", fetchRequirements, {
     refetchOnWindowFocus: false,
@@ -63,7 +74,11 @@ export default function EditableJob({ jobDetails, setJobDetails }) {
           )}
         </div>
         <div>
-          <JobConditionsForm  _id={jobDetails?._id} />
+          <JobConditionsForm
+            _id={jobDetails?._id}
+            jobConditions={conditions}
+            setJobConditions={setConditions}
+          />
         </div>
       </Carousel>
     </div>
