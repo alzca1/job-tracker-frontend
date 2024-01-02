@@ -97,6 +97,15 @@ export default function JobRequirementsForm({ _id, jobRequirements, setJobRequir
           <SaveOutlined />
         </Button>
       ) : null}
+      {Object.values(jobRequirements).some((value) => value == "") && (
+        <Form onFinish={handleSubmit} form={form}>
+          <Form.Item name="requirement">
+            <Select labelInValue options={getFilteredOptions()} placeholder="Select option" />
+          </Form.Item>
+          <InputField name="requirementValue" />
+          <Button htmlType="submit">Add Requirement</Button>
+        </Form>
+      )}
       <div>
         <ul>
           {Object.entries(jobRequirements).map(([key, value]) => {
@@ -110,15 +119,6 @@ export default function JobRequirementsForm({ _id, jobRequirements, setJobRequir
           })}
         </ul>
       </div>
-      {Object.values(jobRequirements).some((value) => value == "") && (
-        <Form onFinish={handleSubmit} form={form}>
-          <Form.Item name="requirement" label="Requirement">
-            <Select labelInValue options={getFilteredOptions()} placeholder="Select option" />
-          </Form.Item>
-          <InputField name="requirementValue" />
-          <Button htmlType="submit">Add Requirement</Button>
-        </Form>
-      )}
     </div>
   );
 }

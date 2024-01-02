@@ -5,9 +5,11 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import { getToken } from "../../helpers/auth";
 import { useEffect, useState } from "react";
+import JobConditionsForm from "../Forms/JobConditionsForm";
 
 export default function EditableJob({ jobDetails, setJobDetails }) {
   const [requirements, setRequirements] = useState({});
+  const [conditions, setConditions] = useState({});
 
   const headers = {
     headers: {
@@ -59,6 +61,9 @@ export default function EditableJob({ jobDetails, setJobDetails }) {
               setJobRequirements={setRequirements}
             />
           )}
+        </div>
+        <div>
+          <JobConditionsForm />
         </div>
       </Carousel>
     </div>
