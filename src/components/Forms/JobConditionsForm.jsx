@@ -33,10 +33,13 @@ export default function JobConditionsForm({ _id, jobConditions, setJobConditions
 
   const addPerk = () => {
     const perkFieldValue = form.getFieldValue("perk");
-    if (jobConditions.includes(perkFieldValue)) {
+    if (perks.includes(perkFieldValue)) {
       return;
     }
-    setJobConditions((prevState) => [...prevState, perkFieldValue]);
+    setJobConditions((prevState) => ({
+      ...prevState,
+      perks: [...prevState.perks, perkFieldValue],
+    }));
     form.resetFields(["perk"]);
   };
 
@@ -50,6 +53,11 @@ export default function JobConditionsForm({ _id, jobConditions, setJobConditions
     console.log("jobConditions", jobConditions);
   }, [jobConditions]);
 
+  console.log("perkkkkssss", perks);
+
+  if (!perks) {
+    return <p>There was a problem loading the data</p>;
+  }
   return (
     <div>
       <h3>Conditions</h3>
@@ -73,8 +81,8 @@ export default function JobConditionsForm({ _id, jobConditions, setJobConditions
         </div>
       </Form>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {jobConditions.perks.length &&
-          jobConditions.perks.map((perk, index) => (
+        {perks.length &&
+          perks.map((perk, index) => (
             <Chip text={perk} callback={removePerk} key={`${perk}${index}`} />
           ))}
       </div>

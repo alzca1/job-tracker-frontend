@@ -6,10 +6,12 @@ import axios from "axios";
 import { getToken } from "../../helpers/auth";
 import { useEffect, useState } from "react";
 import JobConditionsForm from "../Forms/JobConditionsForm";
+import HistoricForm from "../Forms/HistoricForm";
 
 export default function EditableJob({ jobDetails, setJobDetails }) {
   const [requirements, setRequirements] = useState({});
   const [conditions, setConditions] = useState({});
+  const [historic, setHistoric] = useState([]);
 
   const headers = {
     headers: {
@@ -37,11 +39,13 @@ export default function EditableJob({ jobDetails, setJobDetails }) {
       variable: details?.data?.variable,
       perks: details?.data?.socialBenefits,
     });
+
+    setHistoric(details?.data?.historic);
   };
 
   useEffect(() => {
-    console.log("conditions", conditions);
-  }, [conditions]);
+    console.log("historic", historic);
+  }, [historic]);
 
   const { status } = useQuery("jobInfo", fetchRequirements, {
     refetchOnWindowFocus: false,
@@ -79,6 +83,9 @@ export default function EditableJob({ jobDetails, setJobDetails }) {
             jobConditions={conditions}
             setJobConditions={setConditions}
           />
+        </div>
+        <div>
+          <HistoricForm historic={historic} setHistoric={setHistoric} _id={jobDetails?._id} />
         </div>
       </Carousel>
     </div>

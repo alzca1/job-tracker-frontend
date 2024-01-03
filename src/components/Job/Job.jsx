@@ -69,7 +69,9 @@ export default function Job({ jobData }) {
         // className="job-edit"
         styles={modalStyles}
       >
-        <EditableJob jobDetails={jobDetails} setJobDetails={setJobDetails} />
+        <div>
+          <EditableJob jobDetails={jobDetails} setJobDetails={setJobDetails} />
+        </div>
       </Modal>
     </div>
   );
