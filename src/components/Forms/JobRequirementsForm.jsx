@@ -13,8 +13,16 @@ const options = [
   { value: "availabilityRequired", label: "Disponibilidad" },
   { value: "languagesRequired", label: "Idiomas" },
 ];
-export default function JobRequirementsForm({ jobDetails: { _id } }) {
-  const [requirements, setRequirements] = useState([]);
+
+const labels = {
+  minimumExperience: "Experiencia mínima",
+  educationRequired: "Estudios mínimos",
+  residenceRequired: "Residencia",
+  availabilityRequired: "Disponibilidad",
+  languagesRequired: "Idiomas",
+};
+
+export default function JobRequirementsForm({ _id, jobRequirements, setJobRequirements }) {
   const [valuesAdded, setValuesAdded] = useState(false);
   const [form] = Form.useForm();
 
@@ -26,12 +34,12 @@ export default function JobRequirementsForm({ jobDetails: { _id } }) {
   };
 
   const mutation = useMutation({
-    mutationFn: (requirements) => {
+    mutationFn: (data) => {
       const refinedRequirements = {
         _id: _id,
       };
-      for (let requirement of requirements) {
-        refinedRequirements[requirement.key] = requirement.value;
+      for (let requirement in data) {
+        refinedRequirements[requirement] = data[requirement];
       }
 
       // hay que cocinar los requirements aquí
@@ -46,32 +54,39 @@ export default function JobRequirementsForm({ jobDetails: { _id } }) {
   const handleSubmit = (formValues) => {
     setValuesAdded(true);
 
-    const requirement = {
-      key: formValues.requirement.key,
-      label: formValues.requirement.label,
-      value: formValues.requirementValue,
-    };
-    setRequirements((prevState) => [...prevState, requirement]);
+    setJobRequirements((prevState) => ({
+      ...prevState,
+      [formValues.requirement.key]: formValues.requirementValue,
+    }));
+
     form.resetFields();
   };
 
   const getFilteredOptions = () => {
-    const filteredOptions = options.filter((option) => {
-      return !requirements.some((requirement) => requirement.key === option.value);
-    });
+    let filteredOptions = {};
+
+    if (Object.keys(jobRequirements).length > 0) {
+      filteredOptions = options.filter((option) => jobRequirements[option.value] == "");
+    }
+
     return filteredOptions;
   };
 
   const removeRequirement = (key) => {
-    const filteredRequirements = [...requirements].filter((requirement) => requirement.key !== key);
-    setRequirements(filteredRequirements);
+    const filteredRequirements = { ...jobRequirements };
+    for (let requirement in filteredRequirements) {
+      if (requirement === key) {
+        filteredRequirements[requirement] = "";
+      }
+    }
+    setJobRequirements(filteredRequirements);
     if (filteredRequirements.length === 0) {
       setValuesAdded(false);
     }
   };
 
   const handleSaveRequirements = () => {
-    mutation.mutate(requirements);
+    mutation.mutate(jobRequirements);
   };
 
   return (
@@ -82,25 +97,36 @@ export default function JobRequirementsForm({ jobDetails: { _id } }) {
           <SaveOutlined />
         </Button>
       ) : null}
-      <div>
-        <ul>
-          {requirements.map((requirement) => (
-            <li key={requirement.key}>
-              {`${requirement.label}: ${requirement.value}`}{" "}
-              <DeleteOutlined onClick={() => removeRequirement(requirement.key)} />
-            </li>
-          ))}
-        </ul>
-      </div>
-      {getFilteredOptions().length > 0 && (
+      {Object.values(jobRequirements).some((value) => value == "") && (
         <Form onFinish={handleSubmit} form={form}>
-          <Form.Item name="requirement" label="Requirement">
+          <Form.Item name="requirement">
             <Select labelInValue options={getFilteredOptions()} placeholder="Select option" />
           </Form.Item>
           <InputField name="requirementValue" />
           <Button htmlType="submit">Add Requirement</Button>
         </Form>
       )}
+      <div>
+        <ul>
+          {Object.entries(jobRequirements).map(([key, value]) => {
+            if (value)
+              return (
+                <li key={key}>
+                  {`${labels[key]}:${value}`}
+                  <DeleteOutlined onClick={() => removeRequirement(key)} />
+                </li>
+              );
+          })}
+        </ul>
+      </div>
     </div>
   );
 }
+
+// 1)Tenemos un state en forma de objeto:
+//{minimumExperience: "3 years", ...}
+// 2) Debemos tener un objeto "labels" o array de objetos "labels" que contengan
+// la llave del state y el label que se ha de utilizar
+// 3) Cuando se renderiza el componente, debemos recorrer
+// el state y generar un span para cada propiedad que tenga
+// valor

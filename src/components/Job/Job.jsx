@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { formatDate } from "../../helpers/date";
 import { Modal } from "antd";
 import EditableJob from "../EditableJob/EditableJob";
@@ -69,7 +69,9 @@ export default function Job({ jobData }) {
         // className="job-edit"
         styles={modalStyles}
       >
-        <EditableJob jobDetails={jobDetails} setJobDetails={setJobDetails} />
+        <div>
+          <EditableJob jobDetails={jobDetails} setJobDetails={setJobDetails} />
+        </div>
       </Modal>
     </div>
   );
