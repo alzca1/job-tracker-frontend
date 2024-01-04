@@ -2,24 +2,13 @@ import { Button, Form } from "antd";
 import InputField from "../FormFields/InputField";
 import StatusSelect from "../FormFields/StatusSelect";
 import DateField from "../FormFields/DatePicker";
-import {
-  CheckOutlined,
-  ExclamationOutlined,
-  LoadingOutlined,
-  SaveOutlined,
-} from "@ant-design/icons";
+
 import { getToken } from "../../helpers/auth";
 import { useMutation } from "react-query";
 import axios from "axios";
 import dayjs from "dayjs";
 import { useState } from "react";
-
-const statusIcons = {
-  idle: () => <SaveOutlined />,
-  loading: () => <LoadingOutlined />,
-  success: () => <CheckOutlined />,
-  error: () => <ExclamationOutlined />,
-};
+import SaveStatusButton from "../Buttons/SaveStatusButton";
 
 export default function InitialJobDetailsEditForm({ jobDetails, setJobDetails }) {
   const { _id, position, companyName, status, dateApplied } = jobDetails;
@@ -62,6 +51,10 @@ export default function InitialJobDetailsEditForm({ jobDetails, setJobDetails })
     },
   });
   const handleSubmit = (formValues) => {
+    if (saveStatus != "idle") {
+      return false;
+    }
+
     for (let key in formValues) {
       if (!formValues[key]) {
         delete formValues[key];
@@ -85,10 +78,7 @@ export default function InitialJobDetailsEditForm({ jobDetails, setJobDetails })
           dateApplied: dayjs(dateApplied),
         }}
       >
-        <Button htmlType="submit">
-          {/* <SaveOutlined /> */}
-          {statusIcons[saveStatus]()}
-        </Button>
+        <SaveStatusButton status={saveStatus} />
         <InputField name="position" placeholder="Enter position" className="" />
         <InputField name="companyName" placeholder="Enter company name" className="" />
         <StatusSelect />
