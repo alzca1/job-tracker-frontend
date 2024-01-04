@@ -2,14 +2,29 @@ import { Button, Form } from "antd";
 import InputField from "../FormFields/InputField";
 import StatusSelect from "../FormFields/StatusSelect";
 import DateField from "../FormFields/DatePicker";
-import { SaveOutlined } from "@ant-design/icons";
+import {
+  CheckOutlined,
+  ExclamationOutlined,
+  LoadingOutlined,
+  SaveOutlined,
+} from "@ant-design/icons";
 import { getToken } from "../../helpers/auth";
 import { useMutation } from "react-query";
 import axios from "axios";
 import dayjs from "dayjs";
+import { useState } from "react";
+
+const statusIcons = {
+  idle: () => <SaveOutlined />,
+  loading: () => <LoadingOutlined />,
+  success: () => <CheckOutlined />,
+  error: () => <ExclamationOutlined />,
+};
 
 export default function InitialJobDetailsEditForm({ jobDetails, setJobDetails }) {
   const { _id, position, companyName, status, dateApplied } = jobDetails;
+
+  const [saveStatus, setSaveStatus] = useState("idle");
 
   const headers = {
     headers: {
@@ -20,6 +35,7 @@ export default function InitialJobDetailsEditForm({ jobDetails, setJobDetails })
 
   const mutation = useMutation({
     mutationFn: (formValues) => {
+      setSaveStatus("loading");
       return axios.put(
         `${import.meta.env.VITE_BACKEND_URL}/application/update`,
         formValues,
@@ -28,10 +44,21 @@ export default function InitialJobDetailsEditForm({ jobDetails, setJobDetails })
     },
 
     onSuccess: (data, variables) => {
+      setSaveStatus("success");
       setJobDetails((prevState) => ({
         ...prevState,
         ...variables,
       }));
+      setTimeout(() => {
+        setSaveStatus("idle");
+      }, 2000);
+    },
+    onError: (error) => {
+      setSaveStatus("error");
+      setTimeout(() => {
+        setSaveStatus("idle");
+      }, 2000);
+      console.log("error", error);
     },
   });
   const handleSubmit = (formValues) => {
@@ -48,6 +75,7 @@ export default function InitialJobDetailsEditForm({ jobDetails, setJobDetails })
 
   return (
     <div className="InitialJobDetailsForm">
+      <h3>Basic Details</h3>
       <Form
         onFinish={handleSubmit}
         initialValues={{
@@ -58,7 +86,8 @@ export default function InitialJobDetailsEditForm({ jobDetails, setJobDetails })
         }}
       >
         <Button htmlType="submit">
-          <SaveOutlined />
+          {/* <SaveOutlined /> */}
+          {statusIcons[saveStatus]()}
         </Button>
         <InputField name="position" placeholder="Enter position" className="" />
         <InputField name="companyName" placeholder="Enter company name" className="" />
