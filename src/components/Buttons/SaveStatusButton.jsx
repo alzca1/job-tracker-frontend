@@ -1,5 +1,4 @@
 import { Button } from "antd";
-import React from "react";
 import {
   CheckOutlined,
   ExclamationOutlined,
@@ -7,7 +6,7 @@ import {
   SaveOutlined,
 } from "@ant-design/icons";
 
-export const statusIcons = {
+const statusIcons = {
   idle: () => <SaveOutlined />,
   loading: () => <LoadingOutlined />,
   success: () => <CheckOutlined />,
