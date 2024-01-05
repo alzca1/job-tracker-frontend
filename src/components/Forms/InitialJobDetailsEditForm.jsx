@@ -1,7 +1,6 @@
 import { Form } from "antd";
 import InputField from "../FormFields/InputField";
 import StatusSelect from "../FormFields/StatusSelect";
-import DateField from "../FormFields/DatePicker";
 
 import { getToken } from "../../helpers/auth";
 import { useMutation } from "react-query";
@@ -68,6 +67,8 @@ export default function InitialJobDetailsEditForm({ jobDetails, setJobDetails })
 
   return (
     <div className="InitialJobDetailsEditForm">
+      <SaveStatusButton status={saveStatus} />
+
       <Form
         onFinish={handleSubmit}
         initialValues={{
@@ -85,10 +86,13 @@ export default function InitialJobDetailsEditForm({ jobDetails, setJobDetails })
             className="companyNameInput"
           />
         </div>
-        <StatusSelect />
-        <DateField name="dateApplied" />
+        <div className="job-status-date">
+          <StatusSelect dropdownStyle="statusSelect" />
+          <span className="dateApplied">
+            Created: {dayjs(dateApplied).format("DD/MM/YYYY HH:MM")}
+          </span>
+        </div>
       </Form>
-      <SaveStatusButton status={saveStatus} />
     </div>
   );
 }

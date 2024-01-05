@@ -1,4 +1,13 @@
 .InitialJobDetailsEditForm {
+    button {
+        position: absolute;
+        top: 0rem;
+        right: 77.65%;
+        box-shadow: none;
+        transform: scale(1.5);
+        z-index: 10;
+    }
+
     input,
     input:focus {
         border: none;
@@ -30,14 +39,41 @@
             line-height: 0 !important;
             min-height: 0px !important;
         }
+        .companyNameInput input {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: black;
+            margin: 0 !important;
+            padding: 0 !important;
+            line-height: 0 !important;
+            min-height: 0px !important;
+        }
     }
-    .companyNameInput input {
-        font-size: 1.1rem;
-        font-weight: 600;
-        color: black;
-        margin: 0 !important;
-        padding: 0 !important;
-        line-height: 0 !important;
-        min-height: 0px !important;
+
+    .job-status-date {
+        display: flex;
+        flex-direction: column;
+
+        .ant-select-selector {
+            background-color: transparent !important;
+            border: none !important;
+            outline: none;
+            font-size: 2.5rem;
+            font-weight: 100;
+            box-shadow: none !important;
+            text-align: center;
+            margin: 3.5rem 0;
+        }
+
+        .ant-select-selection-item {
+            line-height: 3rem;
+        }
+
+        .dateApplied {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            align-self: end;
+            font-weight: 200;
+        }
     }
 }
