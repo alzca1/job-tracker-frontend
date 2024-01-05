@@ -39,8 +39,16 @@ export default function InitialJobDetailsForm({ handleShowModal, setJobs }) {
   return (
     <div className="InitialJobDetailsForm">
       <Form onFinish={handleSubmit} initialValues={{ status: "pending", dateApplied: today }}>
-        <InputField name="position" placeholder="Enter position" className="" />
-        <InputField name="companyName" placeholder="Enter company name" className="" />
+        <InputField
+          name="position"
+          placeholder="Enter position"
+          className="InitialJobDetailsFormInput"
+        />
+        <InputField
+          name="companyName"
+          placeholder="Enter company name"
+          className="InitialJobDetailsFormInput"
+        />
         <StatusSelect />
         <DateField name="dateApplied" />
         <Button htmlType="submit">Create job</Button>

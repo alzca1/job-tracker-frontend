@@ -1,4 +1,4 @@
-import { Button, Form } from "antd";
+import { Form } from "antd";
 import InputField from "../FormFields/InputField";
 import StatusSelect from "../FormFields/StatusSelect";
 import DateField from "../FormFields/DatePicker";
@@ -11,7 +11,7 @@ import { useState } from "react";
 import SaveStatusButton from "../Buttons/SaveStatusButton";
 
 export default function InitialJobDetailsEditForm({ jobDetails, setJobDetails }) {
-  const { _id, position, companyName, status, dateApplied } = jobDetails;
+  const { position, companyName, status, dateApplied } = jobDetails;
 
   const [saveStatus, setSaveStatus] = useState("idle");
 
@@ -67,8 +67,7 @@ export default function InitialJobDetailsEditForm({ jobDetails, setJobDetails })
   };
 
   return (
-    <div className="InitialJobDetailsForm">
-      <h3>Basic Details</h3>
+    <div className="InitialJobDetailsEditForm">
       <Form
         onFinish={handleSubmit}
         initialValues={{
@@ -78,12 +77,18 @@ export default function InitialJobDetailsEditForm({ jobDetails, setJobDetails })
           dateApplied: dayjs(dateApplied),
         }}
       >
-        <SaveStatusButton status={saveStatus} />
-        <InputField name="position" placeholder="Enter position" className="" />
-        <InputField name="companyName" placeholder="Enter company name" className="" />
+        <div className="job-info">
+          <InputField name="position" placeholder="Enter position" className="positionInput" />
+          <InputField
+            name="companyName"
+            placeholder="Enter company name"
+            className="companyNameInput"
+          />
+        </div>
         <StatusSelect />
         <DateField name="dateApplied" />
       </Form>
+      <SaveStatusButton status={saveStatus} />
     </div>
   );
 }
