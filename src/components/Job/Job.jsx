@@ -49,7 +49,7 @@ export default function Job({ jobData }) {
     <div
       className="Job"
       onDoubleClick={() => setIsModalOpen(true)}
-      style={{ backgroundColor: stateColors[status] }}
+      style={{ backgroundColor: stateColors[jobDetails?.status] }}
     >
       <div className="job-info">
         <span>{jobDetails?.position || "N/A"}</span>

@@ -1,12 +1,4 @@
 .InitialJobDetailsEditForm {
-    // button {
-    //     top: 0rem;
-    //     right: 77.65%;
-    //     box-shadow: none;
-    //     transform: scale(1.5);
-    //     z-index: 10;
-    // }
-
     input,
     input:focus {
         border: none;
@@ -44,19 +36,15 @@
         .positionInput input {
             font-size: 1.5rem;
             font-weight: 800;
-            margin: 0 !important;
             padding: 0 !important;
             line-height: 0 !important;
-            min-height: 0px !important;
         }
         .companyNameInput input {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             color: black;
-            margin: 0 !important;
+            margin-top: -20px !important;
             padding: 0 !important;
-            line-height: 0 !important;
-            min-height: 0px !important;
         }
     }
 
