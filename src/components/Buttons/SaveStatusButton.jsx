@@ -15,7 +15,7 @@ const statusIcons = {
 
 export default function SaveStatusButton({ status }) {
   return (
-    <Button className="SaveStatusButton" htmlType={"submit"}>
+    <Button className="SaveStatusButton" htmlType="submit">
       {statusIcons[status]()}
     </Button>
   );
