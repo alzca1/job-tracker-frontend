@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import JobConditionsForm from "../Forms/JobConditionsForm";
 import HistoricForm from "../Forms/HistoricForm";
 
-export default function EditableJob({ jobDetails, setJobDetails }) {
+export default function EditableJob({ jobDetails, setJobDetails, setTemporaryStatus }) {
   const [requirements, setRequirements] = useState({});
   const [conditions, setConditions] = useState({});
   const [historic, setHistoric] = useState([]);
@@ -66,7 +66,7 @@ export default function EditableJob({ jobDetails, setJobDetails }) {
       {console.log("content loaded")}
       <Carousel>
         <div>
-          <InitialJobDetailsEditForm jobDetails={jobDetails} setJobDetails={setJobDetails} />
+          <InitialJobDetailsEditForm jobDetails={jobDetails} setJobDetails={setJobDetails} setTemporaryStatus={setTemporaryStatus} />
         </div>
         <div>
           {Object.keys(requirements).length && (

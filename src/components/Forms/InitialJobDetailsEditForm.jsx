@@ -9,7 +9,11 @@ import dayjs from "dayjs";
 import { useState } from "react";
 import SaveStatusButton from "../Buttons/SaveStatusButton";
 
-export default function InitialJobDetailsEditForm({ jobDetails, setJobDetails }) {
+export default function InitialJobDetailsEditForm({
+  jobDetails,
+  setJobDetails,
+  setTemporaryStatus,
+}) {
   const { position, companyName, status, dateApplied } = jobDetails;
 
   const [saveStatus, setSaveStatus] = useState("idle");
@@ -50,7 +54,6 @@ export default function InitialJobDetailsEditForm({ jobDetails, setJobDetails })
     },
   });
   const handleSubmit = (formValues) => {
-    debugger;
     if (saveStatus != "idle") {
       return false;
     }
@@ -88,7 +91,7 @@ export default function InitialJobDetailsEditForm({ jobDetails, setJobDetails })
           />
         </div>
         <div className="job-status-date">
-          <StatusSelect dropdownStyle="statusSelect" />
+          <StatusSelect dropdownStyle="statusSelect" setTemporaryStatus={setTemporaryStatus} />
           <span className="dateApplied">
             Created: {dayjs(dateApplied).format("DD/MM/YYYY HH:MM")}
           </span>
