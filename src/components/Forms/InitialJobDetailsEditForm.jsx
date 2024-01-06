@@ -50,6 +50,7 @@ export default function InitialJobDetailsEditForm({ jobDetails, setJobDetails })
     },
   });
   const handleSubmit = (formValues) => {
+    debugger;
     if (saveStatus != "idle") {
       return false;
     }
@@ -67,8 +68,6 @@ export default function InitialJobDetailsEditForm({ jobDetails, setJobDetails })
 
   return (
     <div className="InitialJobDetailsEditForm">
-      <SaveStatusButton status={saveStatus} />
-
       <Form
         onFinish={handleSubmit}
         initialValues={{
@@ -78,6 +77,8 @@ export default function InitialJobDetailsEditForm({ jobDetails, setJobDetails })
           dateApplied: dayjs(dateApplied),
         }}
       >
+        <SaveStatusButton status={saveStatus} />
+
         <div className="job-info">
           <InputField name="position" placeholder="Enter position" className="positionInput" />
           <InputField
