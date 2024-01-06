@@ -70,7 +70,11 @@ export default function Job({ jobData }) {
         styles={modalStyles}
       >
         <div>
-          <EditableJob jobDetails={jobDetails} setJobDetails={setJobDetails} setTemporaryStatus={setTemporaryStatus} />
+          <EditableJob
+            jobDetails={jobDetails}
+            setJobDetails={setJobDetails}
+            setTemporaryStatus={setTemporaryStatus}
+          />
         </div>
       </Modal>
     </div>

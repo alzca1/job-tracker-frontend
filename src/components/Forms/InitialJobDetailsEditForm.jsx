@@ -80,10 +80,11 @@ export default function InitialJobDetailsEditForm({
           dateApplied: dayjs(dateApplied),
         }}
       >
-        <SaveStatusButton status={saveStatus} />
-
         <div className="job-info">
-          <InputField name="position" placeholder="Enter position" className="positionInput" />
+          <div className="job-inputs">
+            <InputField name="position" placeholder="Enter position" className="positionInput" />
+            <SaveStatusButton status={saveStatus} />
+          </div>
           <InputField
             name="companyName"
             placeholder="Enter company name"

@@ -1,12 +1,11 @@
 .InitialJobDetailsEditForm {
-    button {
-        position: absolute;
-        top: 0rem;
-        right: 77.65%;
-        box-shadow: none;
-        transform: scale(1.5);
-        z-index: 10;
-    }
+    // button {
+    //     top: 0rem;
+    //     right: 77.65%;
+    //     box-shadow: none;
+    //     transform: scale(1.5);
+    //     z-index: 10;
+    // }
 
     input,
     input:focus {
@@ -21,6 +20,17 @@
     .job-info {
         display: flex;
         flex-direction: column;
+
+        .job-inputs {
+            display: flex;
+            justify-content: space-between;
+
+            button {
+                transform: scale(1.5);
+                outline: none;
+                box-shadow: none;
+            }
+        }
 
         .ant-form-item {
             margin-bottom: 0 !important;

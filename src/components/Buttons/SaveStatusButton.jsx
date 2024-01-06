@@ -5,18 +5,18 @@ import {
   LoadingOutlined,
   SaveOutlined,
 } from "@ant-design/icons";
-
-const statusIcons = {
-  idle: () => <SaveOutlined />,
-  loading: () => <LoadingOutlined />,
-  success: () => <CheckOutlined />,
-  error: () => <ExclamationOutlined />,
-};
+import { useEffect } from "react";
 
 export default function SaveStatusButton({ status }) {
+  const statusIcons = {
+    idle: <SaveOutlined />,
+    loading: <LoadingOutlined />,
+    success: <CheckOutlined />,
+    error: <ExclamationOutlined />,
+  };
   return (
     <Button className="SaveStatusButton" htmlType="submit">
-      {statusIcons[status]()}
+      {statusIcons[status]}
     </Button>
   );
 }
