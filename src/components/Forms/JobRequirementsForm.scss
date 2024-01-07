@@ -1,8 +1,29 @@
 .JobRequirements {
-    .jobRequirementsForm {
-        border: 1px solid red;
+    ul {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+        grid-template-columns: repeat(1fr);
+
+        li {
+            all: unset;
+        }
+    }
+    .jobRequirementsForm {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+
+        .inputFieldContainer {
+            display: grid;
+            grid-template-columns: 1fr 30px 30px;
+        }
+
+        button {
+            padding: 0;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            box-shadow: none;
+            transform: scale(1.5);
+        }
     }
 }

@@ -1,7 +1,13 @@
-import { Button, Form, Select } from "antd";
-import { useState } from "react";
+import { Button, Form, Select, Tooltip } from "antd";
+import { useEffect, useState } from "react";
 import InputField from "../FormFields/InputField";
-import { DeleteOutlined, SaveOutlined } from "@ant-design/icons";
+import {
+  CloseOutlined,
+  DeleteOutlined,
+  PlusOutlined,
+  SaveOutlined,
+  StopFilled,
+} from "@ant-design/icons";
 import { useMutation } from "react-query";
 import { getToken } from "../../helpers/auth";
 import axios from "axios";
@@ -25,6 +31,8 @@ const labels = {
 export default function JobRequirementsForm({ _id, jobRequirements, setJobRequirements }) {
   const [valuesAdded, setValuesAdded] = useState(false);
   const [form] = Form.useForm();
+  const [mustShowForm, setMustShowForm] = useState(false);
+  const [mustShowAddButton, setMustShowAddButton] = useState(false);
 
   const headers = {
     headers: {
@@ -32,6 +40,14 @@ export default function JobRequirementsForm({ _id, jobRequirements, setJobRequir
       Authorization: `Bearer ${getToken()?.token}`,
     },
   };
+
+  useEffect(() => {
+    for (let requirement in jobRequirements) {
+      if (jobRequirements[requirement] == "") {
+        setMustShowAddButton(true);
+      }
+    }
+  }, [jobRequirements]);
 
   const mutation = useMutation({
     mutationFn: (data) => {
@@ -52,7 +68,11 @@ export default function JobRequirementsForm({ _id, jobRequirements, setJobRequir
   });
 
   const handleSubmit = (formValues) => {
+    if (!formValues?.requirementValue || formValues.requirementValue == "") {
+      return;
+    }
     setValuesAdded(true);
+    setMustShowForm(false);
 
     setJobRequirements((prevState) => ({
       ...prevState,
@@ -88,24 +108,13 @@ export default function JobRequirementsForm({ _id, jobRequirements, setJobRequir
   const handleSaveRequirements = () => {
     mutation.mutate(jobRequirements);
   };
+  const handleShowForm = () => {
+    setMustShowAddButton(false);
+    setMustShowForm(true);
+  };
 
   return (
-    <div>
-      <h3>Requirements</h3>
-      {valuesAdded ? (
-        <Button onClick={handleSaveRequirements}>
-          <SaveOutlined />
-        </Button>
-      ) : null}
-      {Object.values(jobRequirements).some((value) => value == "") && (
-        <Form onFinish={handleSubmit} form={form}>
-          <Form.Item name="requirement">
-            <Select labelInValue options={getFilteredOptions()} placeholder="Select option" />
-          </Form.Item>
-          <InputField name="requirementValue" />
-          <Button htmlType="submit">Add Requirement</Button>
-        </Form>
-      )}
+    <div className="JobRequirements">
       <div>
         <ul>
           {Object.entries(jobRequirements).map(([key, value]) => {
@@ -118,7 +127,54 @@ export default function JobRequirementsForm({ _id, jobRequirements, setJobRequir
               );
           })}
         </ul>
+        {mustShowAddButton && !mustShowForm && (
+          <Button onClick={handleShowForm}>Add requirement</Button>
+        )}
       </div>
+      {valuesAdded ? (
+        <Button onClick={handleSaveRequirements}>
+          <SaveOutlined />
+        </Button>
+      ) : null}
+      {mustShowForm && (
+        <Form onFinish={handleSubmit} form={form} className="jobRequirementsForm">
+          <Form.Item name="requirement" className="optionSelectItem">
+            <Select
+              className="optionSelector"
+              labelInValue
+              options={getFilteredOptions()}
+              placeholder="Select option"
+            />
+          </Form.Item>
+          <div className="inputFieldContainer">
+            <InputField name="requirementValue" />
+            <Tooltip title="Add requirement">
+              <Button htmlType="submit">
+                <PlusOutlined />
+              </Button>
+            </Tooltip>
+            <Tooltip title="Cancel">
+              <Button onClick={() => setMustShowForm(false)}>
+                <CloseOutlined />
+              </Button>
+            </Tooltip>
+          </div>
+        </Form>
+      )}
+      {/* {Object.values(jobRequirements).some((value) => value == "") && (
+        <Form onFinish={handleSubmit} form={form} className="jobRequirementsForm">
+          <Form.Item name="requirement" className="optionSelectItem">
+            <Select
+              className="optionSelector"
+              labelInValue
+              options={getFilteredOptions()}
+              placeholder="Select option"
+            />
+          </Form.Item>
+          <InputField name="requirementValue" />
+          <Button htmlType="submit">Add</Button>
+        </Form>
+      )} */}
     </div>
   );
 }
