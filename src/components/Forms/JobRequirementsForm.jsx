@@ -4,6 +4,7 @@ import InputField from "../FormFields/InputField";
 import {
   CloseOutlined,
   DeleteOutlined,
+  PlusCircleOutlined,
   PlusOutlined,
   SaveOutlined,
   StopFilled,
@@ -130,7 +131,7 @@ export default function JobRequirementsForm({ _id, jobRequirements, setJobRequir
             {Object.entries(jobRequirements).map(([key, value]) => {
               if (value)
                 return (
-                  <li key={key}>
+                  <li key={key} className="requirementItem">
                     <span className="requirementName">
                       <DeleteOutlined onClick={() => removeRequirement(key)} /> {`${labels[key]}:`}
                     </span>
@@ -138,10 +139,13 @@ export default function JobRequirementsForm({ _id, jobRequirements, setJobRequir
                   </li>
                 );
             })}
+            <li className="addRequirementItem">
+              <span>
+                <PlusCircleOutlined />
+                Add Requirement
+              </span>
+            </li>
           </ul>
-          {mustShowAddButton && !mustShowForm && (
-            <Button onClick={handleShowForm}>Add requirement</Button>
-          )}
         </div>
       )}
 

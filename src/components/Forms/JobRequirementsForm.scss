@@ -18,28 +18,52 @@
             align-items: flex-start;
             justify-content: start;
 
-            li {
+            .requirementItem {
                 border-radius: 10px;
                 list-style: none;
                 text-decoration: none;
                 width: 100%;
                 transition: all 0.4s;
-                padding: 0.5rem 1rem;
+                padding: 0.3rem 1rem;
+
+                svg {
+                    transition: 0.5s all;
+                }
+                svg:hover {
+                    fill: red;
+                    transition: 0.5s all;
+                }
+
                 .requirementName {
                     align-self: center;
                     color: black;
                     font-weight: 600;
-                    padding-right: 0.5rem;
                 }
                 .requirementValue {
                     font-weight: 800;
+                    padding-left: 0.5rem;
                 }
             }
-            li:hover {
+            .requirementItem:hover {
                 background-color: #e0e4e2;
                 opacity: 0.5;
                 color: black;
                 transition: 0.5s all;
+            }
+
+            .addRequirementItem {
+                list-style: none !important;
+                padding: 0rem 1rem;
+                cursor: pointer;
+                transition: 0.5s all;
+
+                span {
+                    font-size: 800;
+                    padding-right: 0.35rem;
+                }
+            }
+            .addRequirementItem:hover {
+                color: black;
             }
         }
     }
