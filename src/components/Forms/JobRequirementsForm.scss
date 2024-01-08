@@ -2,6 +2,11 @@
     display: flex;
     flex-direction: column;
 
+    .reloadButton {
+        align-self: flex-end;
+        cursor: pointer;
+    }
+
     .saveButton {
         border: none;
         background-color: transparent;
@@ -17,6 +22,7 @@
             flex-direction: column;
             align-items: flex-start;
             justify-content: start;
+            margin: 0;
 
             .requirementItem {
                 border-radius: 10px;

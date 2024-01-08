@@ -6,6 +6,7 @@ import {
   DeleteOutlined,
   PlusCircleOutlined,
   PlusOutlined,
+  ReloadOutlined,
   SaveOutlined,
   StopFilled,
 } from "@ant-design/icons";
@@ -34,6 +35,7 @@ export default function JobRequirementsForm({ _id, jobRequirements, setJobRequir
   const [form] = Form.useForm();
   const [mustShowForm, setMustShowForm] = useState(false);
   const [mustShowAddButton, setMustShowAddButton] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(0);
 
   const headers = {
     headers: {
@@ -43,10 +45,18 @@ export default function JobRequirementsForm({ _id, jobRequirements, setJobRequir
   };
 
   useEffect(() => {
-    for (let requirement in jobRequirements) {
-      if (jobRequirements[requirement] == "") {
-        setMustShowAddButton(true);
-      }
+    // for (let requirement in jobRequirements) {
+    //   if (jobRequirements[requirement] == "") {
+    //     console.log("jobRequirement with '' ");
+    //     setMustShowAddButton(true);
+    //   }
+    // }
+    if (Object.values(jobRequirements).includes("")) {
+      setMustShowAddButton(true);
+      console.log("is true", jobRequirements);
+    } else {
+      setMustShowAddButton(false);
+      console.log("is false", jobRequirements);
     }
   }, [jobRequirements]);
 
@@ -119,10 +129,10 @@ export default function JobRequirementsForm({ _id, jobRequirements, setJobRequir
   };
 
   return (
-    <div className="JobRequirements">
+    <div className="JobRequirements" key={refreshKey}>
       {valuesAdded ? (
         <Button className="saveButton" onClick={handleSaveRequirements}>
-          <SaveOutlined />
+          <SaveOutlined onClick={handleSaveRequirements} className="saveIcon" />
         </Button>
       ) : null}
       {!mustShowForm && (
@@ -139,12 +149,14 @@ export default function JobRequirementsForm({ _id, jobRequirements, setJobRequir
                   </li>
                 );
             })}
-            <li className="addRequirementItem">
-              <span>
-                <PlusCircleOutlined />
-                Add Requirement
-              </span>
-            </li>
+            {mustShowAddButton && (
+              <li className="addRequirementItem" onClick={handleShowForm}>
+                <span>
+                  <PlusCircleOutlined />
+                  Add Requirement
+                </span>
+              </li>
+            )}
           </ul>
         </div>
       )}
