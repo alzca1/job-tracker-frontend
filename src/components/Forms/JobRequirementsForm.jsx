@@ -131,8 +131,10 @@ export default function JobRequirementsForm({ _id, jobRequirements, setJobRequir
               if (value)
                 return (
                   <li key={key}>
-                    {`${labels[key]}:${value}`}
-                    <DeleteOutlined onClick={() => removeRequirement(key)} />
+                    <span className="requirementName">
+                      <DeleteOutlined onClick={() => removeRequirement(key)} /> {`${labels[key]}:`}
+                    </span>
+                    <span className="requirementValue">{`${value}`}</span>
                   </li>
                 );
             })}

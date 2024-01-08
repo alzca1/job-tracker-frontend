@@ -19,11 +19,21 @@
             justify-content: start;
 
             li {
-                line-height: 1.5rem;
-                display: flex;
+                border-radius: 10px;
+                list-style: none;
+                text-decoration: none;
                 width: 100%;
-                justify-content: space-between;
                 transition: all 0.4s;
+                padding: 0.5rem 1rem;
+                .requirementName {
+                    align-self: center;
+                    color: black;
+                    font-weight: 600;
+                    padding-right: 0.5rem;
+                }
+                .requirementValue {
+                    font-weight: 800;
+                }
             }
             li:hover {
                 background-color: #e0e4e2;
