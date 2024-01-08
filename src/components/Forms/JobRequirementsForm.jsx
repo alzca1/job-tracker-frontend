@@ -113,29 +113,36 @@ export default function JobRequirementsForm({ _id, jobRequirements, setJobRequir
     setMustShowForm(true);
   };
 
+  const handleHideForm = () => {
+    setMustShowForm(false);
+  };
+
   return (
     <div className="JobRequirements">
-      <div>
-        <ul>
-          {Object.entries(jobRequirements).map(([key, value]) => {
-            if (value)
-              return (
-                <li key={key}>
-                  {`${labels[key]}:${value}`}
-                  <DeleteOutlined onClick={() => removeRequirement(key)} />
-                </li>
-              );
-          })}
-        </ul>
-        {mustShowAddButton && !mustShowForm && (
-          <Button onClick={handleShowForm}>Add requirement</Button>
-        )}
-      </div>
       {valuesAdded ? (
-        <Button onClick={handleSaveRequirements}>
+        <Button className="saveButton" onClick={handleSaveRequirements}>
           <SaveOutlined />
         </Button>
       ) : null}
+      {!mustShowForm && (
+        <div className="jobRequirementsList">
+          <ul>
+            {Object.entries(jobRequirements).map(([key, value]) => {
+              if (value)
+                return (
+                  <li key={key}>
+                    {`${labels[key]}:${value}`}
+                    <DeleteOutlined onClick={() => removeRequirement(key)} />
+                  </li>
+                );
+            })}
+          </ul>
+          {mustShowAddButton && !mustShowForm && (
+            <Button onClick={handleShowForm}>Add requirement</Button>
+          )}
+        </div>
+      )}
+
       {mustShowForm && (
         <Form onFinish={handleSubmit} form={form} className="jobRequirementsForm">
           <Form.Item name="requirement" className="optionSelectItem">
@@ -154,7 +161,7 @@ export default function JobRequirementsForm({ _id, jobRequirements, setJobRequir
               </Button>
             </Tooltip>
             <Tooltip title="Cancel">
-              <Button onClick={() => setMustShowForm(false)}>
+              <Button onClick={handleHideForm}>
                 <CloseOutlined />
               </Button>
             </Tooltip>
